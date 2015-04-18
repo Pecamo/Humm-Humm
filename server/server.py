@@ -1,7 +1,5 @@
 #!/usr/bin/python3.4
 
-__author__ = "Jeremy Rabasco"
-
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import json
@@ -17,11 +15,15 @@ class MyServer(BaseHTTPRequestHandler):
         parsed_args = parse_qs(query)
         cleaned_path = urlparse(self.path).path
         print(parsed_args)
-        self.send(200, b"<html><body><h3>SALUT !</h3></body></html>")
+        self.send_html("<html><body><h3>SALUT !</h3></body></html>")
 
-    def send(self, code: int,  data: bytes):
+    def send_html(self, html: str):
+        self.send(200, [("Content-type", "text/html")], bytes(html, encoding="utf -8"))
+
+    def send(self, code: int, headers: [(str, str)],  data: bytes):
         self.send_response(code)
-        self.send_header("Content-type", "text/html")
+        for header in headers:
+            self.send_header(header[0], header[1])
         self.end_headers()
         self.wfile.write(data)
 
