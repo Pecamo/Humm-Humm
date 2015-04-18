@@ -3,9 +3,12 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="view.css">
 		<script src="lib/jquery-2.1.3.min.js"></script>
-		<script src="view.js"></script>
 		<script src="lib/jquery.voice/jquery.voice.min.js"></script>
 		<script src="lib/jquery.voice/recorder.js"></script>
+		<script src="lib/moment.js"></script>
+		<script src="snoocore-standalone.js"></script>
+
+		<script src="post.js"></script>
 		
 		<title>Humm-Humm</title>
 	</head>
@@ -13,20 +16,9 @@
 	<body>
 		<div id="content">
 			<h1 id="humm-humm">Humm-Humm</h1>
-			<div id="audio-capture">
-				<p id="hum-here">Hum here</p>
-				<audio controls src="" id="audio"></audio>
-				<div id="audio-buttons">
-					<button id="record">Record</a>
-					<button id="stop">Stop</a>
-					<button id="download">Download</a>
-				</div>
-				
-				<div id="humming-info"></div>
-				
-			</div>
 			<div id="reddit">
-				<h3><a href="https://www.reddit.com/r/HummHumm">/r/HummHumm</a></h3>
+				<h3 id="postLink"></h3>
+				<div id="comments">Loading comments...</div>
 			</div>
 		</div>
 	</body>
