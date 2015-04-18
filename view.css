@@ -54,7 +54,7 @@ html, body {
 	margin-bottom: 20px;
 }
 
-button{
+button {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0px 5px;
@@ -82,7 +82,7 @@ a.button{
 	box-shadow: inset 0px 1px 1px #8C8C8C;
 }
 
-.button.disabled{
+button.disabled{
 	box-shadow:none;
 	opacity:0.7;
 }
