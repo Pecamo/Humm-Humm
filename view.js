@@ -10,37 +10,40 @@ $('.post').on('click', function () {
 	win.focus();
 });
 
+var vawLoc = "";
 
 // Audio capture button actions
-$(document).ready(function(){
+$(document).ready(function() {
 	$('#download').addClass('disabled');
 	
-	$(document).on("click", "#record:not(.disabled)", function(){
-		$.voice.record(false, function(){
-			$('#record').addClass("disabled");
-			$("#stop, #download").removeClass("disabled");
+	$(document).on('click', '#record:not(.disabled)', function() {
+		$.voice.record(false, function() {
+			$('#record').addClass('disabled');
+			$('#stop, #download').removeClass('disabled');
 			$('#humming-analysis').text('Recording...');
 		});
 	});
 	
-	$(document).on("click", "#stop:not(.disabled)", function(){
+	$(document).on('click', '#stop:not(.disabled)', function() {
 		$.voice.export(function(url){
-			$("#audio").attr("src", url);
-		}, "URL");
-		endRecord();
+			vawLoc = url;
+			$('#audio').attr('src', url);
+			endRecord();
+		}, 'URL');
 	});
 	
-	$(document).on("click", "#download:not(.disabled)", function(){
-		$.voice.export(function(url){
-			$("<a href='"+url+"' download='Recording.wav'></a>")[0].click();
-		}, "URL");
-		endRecord();
+	$(document).on('click', '#download:not(.disabled)', function() {
+		$.voice.export(function(url) {
+			vawLoc = url;
+			$('<a href="'+url+'" download="Recording.wav"></a>')[0].click();
+			endRecord();
+		}, 'URL');
 	});
 });
 
 function endRecord() {
-	$("#record").removeClass("disabled");
-	$("#download").addClass("disabled");
 	$.voice.stop();
+	$('#record').removeClass('disabled');
+	$('#download').addClass('disabled');
 	$('#humming-analysis').text('');
 }
