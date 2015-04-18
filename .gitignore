@@ -79,3 +79,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 assets/logo.pdn
+
+__pycache__
