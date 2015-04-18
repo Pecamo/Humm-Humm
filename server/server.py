@@ -49,12 +49,17 @@ class MyServer(BaseHTTPRequestHandler):
                 f = open(curdir + sep + self.path, 'r')
                 self.send_html(f.read())
                 f.close()
+            elif self.path.endswith(".css"):
+                f = open(curdir + sep + self.path, 'r')
+                self.send_css(f.read())
+                f.close()
+            elif self.path.endswith(".js"):
+                f = open(curdir + sep + self.path, 'r')
+                self.send_js(f.read())
+                f.close()
             else:
-
                 filepath = self.path[1:]
-
                 f = open( os.path.join(CWD, filepath), "rb")
-
                 self.send_file(f.read())
                 f.close()
 
@@ -67,6 +72,12 @@ class MyServer(BaseHTTPRequestHandler):
 
     def send_file(self, file: bytes):
         self.send(200, [("Content-type", "application/octet-stream")], file)
+
+    def send_js(self, js: str):
+        self.send(200, [("Content-type", "application/javascript")], bytes(js, encoding="utf-8"))
+
+    def send_css(self, js: str):
+        self.send(200, [("Content-type", "text/css")], bytes(js, encoding="utf-8"))
 
     def send(self, code: int, headers: [(str, str)],  data: bytes):
         self.send_response(code)
