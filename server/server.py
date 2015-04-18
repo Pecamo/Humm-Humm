@@ -1,13 +1,12 @@
 #!/usr/bin/python3.4
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse
 import os
-import cgi
 from os import curdir, sep
 from helpers import *
 from pymongo import MongoClient
 import gridfs
+from bson.objectid import ObjectId
 
 CWD = os.path.abspath('.')
 
@@ -64,7 +63,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_path(200, [("Content-type", "text/css")], path)
 
     def send_sound(self, path: str):
-        file_id = path.split("/")[-1]
+        file_id = ObjectId(path.split("/")[-1])
         self.send_response(200)
         self.send_header("Content-type", "application/octet-stream")
         self.end_headers()
