@@ -18,8 +18,8 @@ $(document).ready(function() {
 	
 	$(document).on('click', '#record:not(.disabled)', function() {
 		$.voice.record(false, function() {
-			$('#record').addClass('disabled');
-			$('#stop, #download').removeClass('disabled');
+			$('#record, #download').addClass('disabled');
+			$('#stop').removeClass('disabled');
 			$('#humming-info').html('Recording...');
 		});
 	});
@@ -27,26 +27,20 @@ $(document).ready(function() {
 	$(document).on('click', '#stop:not(.disabled)', function() {
 		$.voice.export(function(url){
 			blob = url;
+			$.voice.stop();
+			
 			$('#audio').attr('src', url);
-			endRecord();
+			$('#download').removeClass('disabled');
+			$('#record').removeClass('disabled');
+			$('#stop').addClass('disabled');
+			$('#humming-info').html('<button id="upload">Upload</button>');
 		}, 'URL');
 	});
 	
 	$(document).on('click', '#download:not(.disabled)', function() {
-		$.voice.export(function(url) {
-			blob = url;
-			$('<a href="'+url+'" download="Recording.wav"></a>')[0].click();
-			endRecord();
-		}, 'URL');
+		$('<a href="'+blob+'" download="Recording.wav"></a>')[0].click();
 	});
 });
-
-function endRecord() {
-	$.voice.stop();
-	$('#record').removeClass('disabled');
-	$('#download').addClass('disabled');
-	$('#humming-info').html('<button id="upload">Upload</button>');
-}
 
 $(document).on('click', '#upload', function () {
 	console.log(blob);
