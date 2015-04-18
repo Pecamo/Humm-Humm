@@ -88,8 +88,16 @@ button.disabled{
 }
 
 #humming-info {
-	height: 15px;
+	height: 40px;
 	font-size: 15px;
+}
+
+#upload {
+	margin-top: 5px;
+}
+
+#upload-info {
+	font-style: italic;
 }
 
 #reddit {
