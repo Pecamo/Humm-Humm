@@ -10,7 +10,7 @@ $('.post').on('click', function () {
 	win.focus();
 });
 
-var vawLoc = "";
+var blob = "";
 
 // Audio capture button actions
 $(document).ready(function() {
@@ -20,13 +20,13 @@ $(document).ready(function() {
 		$.voice.record(false, function() {
 			$('#record').addClass('disabled');
 			$('#stop, #download').removeClass('disabled');
-			$('#humming-analysis').text('Recording...');
+			$('#humming-info').html('Recording...');
 		});
 	});
 	
 	$(document).on('click', '#stop:not(.disabled)', function() {
 		$.voice.export(function(url){
-			vawLoc = url;
+			blob = url;
 			$('#audio').attr('src', url);
 			endRecord();
 		}, 'URL');
@@ -34,7 +34,7 @@ $(document).ready(function() {
 	
 	$(document).on('click', '#download:not(.disabled)', function() {
 		$.voice.export(function(url) {
-			vawLoc = url;
+			blob = url;
 			$('<a href="'+url+'" download="Recording.wav"></a>')[0].click();
 			endRecord();
 		}, 'URL');
@@ -45,5 +45,22 @@ function endRecord() {
 	$.voice.stop();
 	$('#record').removeClass('disabled');
 	$('#download').addClass('disabled');
-	$('#humming-analysis').text('');
+	$('#humming-info').html('<button id="upload">Upload</button>');
 }
+
+$(document).on('click', '#upload', function () {
+	console.log(blob);
+	var fd = new FormData();
+	fd.append('fname', 'upload.wav');
+	fd.append('data', blob);
+	
+	$.ajax({
+		type: 'POST',
+		url: '/sound',
+		data: fd,
+		processData: false,
+		contentType: false
+	}).done(function(data) {
+		   console.log(data);
+	});
+});
