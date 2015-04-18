@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Implicit OAuth authentication</title>
+  </head>
+  <body>
+
+    <h1>Implicit OAuth authentication</h1>
+    <p>
+      To run this example:
+      <ul>
+	<li>Create an `installed` app on reddit, and make the redirectUri: `http://localhost:3000/oauth-implicit.html`
+	  <li>Start a server on port 3000 in this directory</li>
+	  <li>Click on the following link to start the authentication process</li>
+	  <li>Once Authenticated, try out subscribing to a subreddit!</li>
+      </ul>
+    </p>
+
+
+    <h2>Authenticate</h2>
+    <a href="#" id="auth_url">Click here to authenticate</a><br>
+
+    <h2>After Auth</h2>
+    <input id="subreddit" type="text" value="netsec" />
+    <input type="submit" onclick="window.subscribe()" value="Subscribe or Unsubscribe!" />
+
+    <h2>Output Panel</h2>
+    <pre id="output"></pre>
+
+
+
+
+    <script src="Snoocore-standalone.js"></script>
+    <script type="text/javascript">
+     (function() {
+
+       var Snoocore = window.Snoocore;
+       var hash = window.location.hash;
+
+       var reddit = new Snoocore({
+	 userAgent: '',
+	 throttle: 1000,
+	 oauth: {
+	   type: 'implicit',
+	   consumerKey: 'j4uYUNHEmIA7dw',
+	   redirectUri: 'http://localhost:3000/browser/oauth-implicit.html',
+	   scope: [ 'identity', 'read', 'subscribe' ]
+	 }
+       });
+
+       // Get the implicit auth url for this application, and set the link's href 
+       document.getElementById('auth_url').href = reddit.getImplicitAuthUrl();
+
+       // Check if we have an access token in the hash, if so
+       // we can authenticate with reddit and make our call!
+       var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
+       var accessToken = match ? match[1] : '';
+
+       if (accessToken) {
+	 reddit.auth(accessToken).then(function() {
+	   // remove the authenticate url
+	   return reddit('/api/v1/me').get();
+	 }).done(function(result) {
+	   document.getElementById('output').innerText = JSON.stringify(result, null, 2);
+	 });
+       }
+
+       window.subscribe = function() {
+	 var subreddit = document.getElementById('subreddit').value;
+
+	 // Get existing information about the subreddit
+	 return reddit('/r/$subreddit/about.json').get({
+	   $subreddit: subreddit
+	 }).then(function(result) {
+
+	   var subFullname = result.data.name; // fullname of the subreddit provided
+	   var isSubbed = result.data.user_is_subscriber; // are we subbed or not?
+
+	   // subscribe or unsubscribe from the subreddit
+	   return reddit('api/subscribe').post({
+	     action: isSubbed ? 'unsub' : 'sub',
+	     sr: subFullname
+	   }).tap(function() {
+	     var text = (isSubbed ? 'un' : '') + 'subscribed' + ' ' +
+			 (isSubbed ? 'from' : 'to') +
+			  ' the subreddit ' + subreddit;
+	     document.getElementById('output').innerText = text;
+	   });
+	 }).catch(function(error) {
+	   document.getElementById('output').innerText = String(error);
+	 });
+       };
+
+     })();
+    </script>
+  </body>
+</html>
