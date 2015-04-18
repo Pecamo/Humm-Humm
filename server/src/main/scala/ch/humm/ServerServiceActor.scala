@@ -1,5 +1,6 @@
 package ch.humm
 
+import spray.can.Http
 import spray.http.HttpRequest
 import spray.http.HttpMethods._
 import scala.concurrent.duration._
@@ -14,8 +15,12 @@ class ServerServiceActor extends Actor with ActorLogging {
 
 
   def receive = {
-    case HttpRequest(GET, Uri.Path("/"), _, _, _) =>
-      log.info("HERE")
+    case _: Http.Connected => sender ! Http.Register(self)
+
+    case HttpRequest(GET, Uri.Path("/"), headers, entity, protocol) =>
+      log.debug("" + headers)
+      log.debug("" + entity)
+      log.debug("" + protocol)
       sender ! hello
     case _ =>
       log.info("Weird message received.")
