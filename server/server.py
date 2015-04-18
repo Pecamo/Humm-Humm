@@ -1,9 +1,13 @@
 #!/usr/bin/python3.4
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse
 import os
+import cgi
 from os import curdir, sep
 from helpers import *
+from pymongo import MongoClient
+import gridfs
 
 CWD = os.path.abspath('.')
 
@@ -11,6 +15,9 @@ CWD = os.path.abspath('.')
 hostName = "0.0.0.0"
 hostPort = 31415
 main_file = "view.html"
+
+db = MongoClient().humm_humm
+fs = gridfs.GridFS(db)
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -31,6 +38,13 @@ class MyServer(BaseHTTPRequestHandler):
         except IOError as e:
             print(e)
             self.send_error(404, "Resource not found : %s" % self.path)
+
+    def do_POST(self):
+        length = self.headers['content-length']
+        data = self.rfile.read(int(length))
+        ref = fs.put(data)
+
+        self.send_response(200)
 
     def send_html(self, path: str):
         self.send(200, [("Content-type", "text/html")], path)
