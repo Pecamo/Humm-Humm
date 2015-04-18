@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import json
 import os
+import cgi
 from os import curdir, sep
 
 CWD = os.path.abspath('.')
@@ -66,6 +67,20 @@ class MyServer(BaseHTTPRequestHandler):
         except IOError as e :
             print(e)
             self.send_error(404,'File Not Found: %s' % self.path)
+
+    def do_POST(self):
+        try:
+            fs = cgi.FieldStorage( fp = self.rfile,
+                                   headers = self.headers,
+                                   environ = {"REQUEST_METHOD":"POST"}
+            )
+            fs_up = fs['upfile']
+            self.send_html("<html><body>" + "</body></html>")
+
+        except Exception as e:
+            # pass
+            print(e)
+            self.send_error(404,'POST to "%s" failed: %s' % (self.path, str(e)) )
 
     def send_html(self, html: str):
         self.send(200, [("Content-type", "text/html")], bytes(html, encoding="utf -8"))
