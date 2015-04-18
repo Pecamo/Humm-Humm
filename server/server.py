@@ -9,8 +9,9 @@ from os import curdir, sep
 CWD = os.path.abspath('.')
 
 
-hostName = "localhost"
+hostName = "0.0.0.0"
 hostPort = 31415
+main_file = "view.html"
 
 
 def make_index(relative_path):
@@ -26,7 +27,7 @@ def make_index(relative_path):
     html_list = []
     for r in relative_list:
         r = r + "/" if os.path.isdir(r) else r
-        html_list.append('<a href="http://localhost:31415/%s">%s</a><br>' % (r, r))
+        html_list.append("<a href=\"http://" + hostName + ":" + str(hostPort) + "/%s\">%s</a><br>" % (r, r))
 
     page_template = "<html><head></head><body>%s</body></html>"
 
@@ -38,12 +39,9 @@ def make_index(relative_path):
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
-
-            if self.path.endswith('/'):
-                relative_path = self.path[1:]
-                relative_path = relative_path if len(relative_path) > 0 else '.'
-                page = make_index(relative_path)
-                self.send_html(page)
+            if self.path == "/":
+                f = open(curdir + sep + main_file, 'r')
+                self.send_html(f.read())
 
             elif self.path.endswith(".html"):
                 f = open(curdir + sep + self.path, 'r')
@@ -76,8 +74,8 @@ class MyServer(BaseHTTPRequestHandler):
     def send_js(self, js: str):
         self.send(200, [("Content-type", "application/javascript")], bytes(js, encoding="utf-8"))
 
-    def send_css(self, js: str):
-        self.send(200, [("Content-type", "text/css")], bytes(js, encoding="utf-8"))
+    def send_css(self, css: str):
+        self.send(200, [("Content-type", "text/css")], bytes(css, encoding="utf-8"))
 
     def send(self, code: int, headers: [(str, str)],  data: bytes):
         self.send_response(code)
