@@ -1,11 +1,9 @@
 #!/usr/bin/python3.4
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse, parse_qs
-import json
 import os
-import cgi
 from os import curdir, sep
+from helpers import *
 
 CWD = os.path.abspath('.')
 
@@ -15,93 +13,45 @@ hostPort = 31415
 main_file = "view.html"
 
 
-def make_index(relative_path):
-
-    absolute_path = os.path.abspath(relative_path)
-    file_list = os.listdir(absolute_path)
-
-    relative_list = []
-    for file_name in file_list:
-        relative_name = os.path.join(relative_path, file_name)
-        relative_list.append(relative_name)
-
-    html_list = []
-    for r in relative_list:
-        r = r + "/" if os.path.isdir(r) else r
-        html_list.append("<a href=\"http://" + hostName + ":" + str(hostPort) + "/%s\">%s</a><br>" % (r, r))
-
-    page_template = "<html><head></head><body>%s</body></html>"
-
-    ret = page_template % ('\n'.join(html_list))
-
-    return ret
-
-
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
+
         try:
+            send_type = get_res_type(self.path).value
             if self.path == "/":
-                f = open(curdir + sep + main_file, 'r')
-                self.send_html(f.read())
-
-            elif self.path.endswith(".html"):
-                f = open(curdir + sep + self.path, 'r')
-                self.send_html(f.read())
-                f.close()
-            elif self.path.endswith(".css"):
-                f = open(curdir + sep + self.path, 'r')
-                self.send_css(f.read())
-                f.close()
-            elif self.path.endswith(".js"):
-                f = open(curdir + sep + self.path, 'r')
-                self.send_js(f.read())
-                f.close()
+                path = main_file
             else:
-                filepath = self.path[1:]
-                f = open( os.path.join(CWD, filepath), "rb")
-                self.send_file(f.read())
-                f.close()
+                path = self.path[1:]
 
-        except IOError as e :
+            path = curdir + sep + path
+
+            do_send = getattr(self, "send_" + send_type)
+            do_send(path)
+
+        except IOError as e:
             print(e)
-            self.send_error(404,'File Not Found: %s' % self.path)
+            self.send_error(404, "Resource not found : %s" % self.path)
 
-    def do_POST(self):
-        try:
-            fs = cgi.FieldStorage( fp = self.rfile,
-                                   headers = self.headers,
-                                   environ = {"REQUEST_METHOD":"POST"}
-            )
-            fs_up = fs['upfile']
-            self.send_html("<html><body>" + "</body></html>")
+    def send_html(self, path: str):
+        self.send(200, [("Content-type", "text/html")], path)
 
-        except Exception as e:
-            # pass
-            print(e)
-            self.send_error(404,'POST to "%s" failed: %s' % (self.path, str(e)) )
+    def send_file(self, path: str):
+        self.send(200, [("Content-type", "application/octet-stream")], path)
 
-    def send_html(self, html: str):
-        self.send(200, [("Content-type", "text/html")], bytes(html, encoding="utf -8"))
+    def send_js(self, path: str):
+        self.send(200, [("Content-type", "application/javascript")], path)
 
-    def send_file(self, file: bytes):
-        self.send(200, [("Content-type", "application/octet-stream")], file)
+    def send_css(self, path: str):
+        self.send(200, [("Content-type", "text/css")], path)
 
-    def send_js(self, js: str):
-        self.send(200, [("Content-type", "application/javascript")], bytes(js, encoding="utf-8"))
-
-    def send_css(self, css: str):
-        self.send(200, [("Content-type", "text/css")], bytes(css, encoding="utf-8"))
-
-    def send(self, code: int, headers: [(str, str)],  data: bytes):
+    def send(self, code: int, headers: [(str, str)],  path: str):
+        file = open(path, 'rb')
         self.send_response(code)
         for header in headers:
             self.send_header(header[0], header[1])
         self.end_headers()
-        self.wfile.write(data)
+        self.wfile.write(file.read())
 
-
-def bytes_json_from_dict(data: dict):
-    return bytes(json.dumps(data), encoding="utf-8")
 
 
 
