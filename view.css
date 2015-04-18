@@ -7,6 +7,8 @@
 html, body {
 	height: 100%;
 	width: 100%;
+	
+	background-color: #888888;
 }
 
 #content {
@@ -14,9 +16,13 @@ html, body {
 	width: 70%;
 	
 	margin: auto;
+	
+	margin-top: 20px;
 	padding: 20px;
 	
-	background-color: grey;
+	background-color: #CBCBCB;
+	
+	border-radius: 10px;
 	
 	text-align: center;
 	font-family: Open Sans, HelveticaNeue, sans-serif;
@@ -32,6 +38,8 @@ html, body {
 	
 	margin-bottom: 20px;
 	padding: 20px;
+	
+	border-radius: 6px;
 	
 	background-color: #F1F1F1;
 }
@@ -88,6 +96,8 @@ a.button{
 	padding: 10px;
 	
 	background-color: #F1F1F1;
+	
+	border-radius: 6px;
 }
 
 #reddit a {
