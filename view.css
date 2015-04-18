@@ -28,20 +28,41 @@ html, body {
 	font-family: Open Sans, HelveticaNeue, sans-serif;
 }
 
+#audio-container {
+	position: relative;
+	width: 100%;
+}
+
 #humm-humm {
 	margin-bottom: 20px;
 }
 
+#login,
 #audio-capture {
 	text-align: center;
 	margin: auto;
 	
 	margin-bottom: 20px;
 	padding: 20px;
+
+	height: 144px;
 	
 	border-radius: 6px;
 	
 	background-color: #F1F1F1;
+}
+
+#login {
+
+	vertical-align: middle;
+
+	width:100%;
+
+	padding: 20px 0px;
+
+	position: absolute;
+	background-color: rgba(127, 127, 127, 0.9);
+	z-index: 10;
 }
 
 #hum-here {
