@@ -211,6 +211,7 @@ a:visited {
 	height: 0;
 	border: transparent 6px solid;
 	border-bottom: gray 10px solid;
+	cursor: pointer;
 }
 
 .score .down {
@@ -218,6 +219,7 @@ a:visited {
 	height: 0;
 	border: transparent 6px solid;
 	border-top: gray 10px solid;
+	cursor: pointer;
 }
 
 .post input[type="text"] {

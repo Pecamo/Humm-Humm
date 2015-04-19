@@ -48,7 +48,7 @@ $(function() {
 			var scores =
 			'<div class="score">' +
 				'<div class="up"></div>' +
-				  '<p>' + (p.ups - p.downs) + '</p>' +
+				  '<p>' + (c.ups - c.downs) + '</p>' +
 				'<div class="down"></div>' +
 			'</div>';
 			
