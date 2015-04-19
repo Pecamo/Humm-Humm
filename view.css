@@ -190,14 +190,14 @@ a:visited {
 	color: #7D6194;
 }
 
-.scores .up {
+.score .up {
 	width: 0;
 	height: 0;
 	border: transparent 6px solid;
 	border-bottom: gray 10px solid;
 }
 
-.scores .down {
+.score .down {
 	width: 0;
 	height: 0;
 	border: transparent 6px solid;
