@@ -3,9 +3,19 @@ function login() {
 	document.location = poney;
 }
 
-function postLink() {
-	var poney = reddit.getImplicitAuthUrl();
-	console.log(poney)
-	document.location = poney;
-	console.log("Got any grapes ?");
+function postLink(link, titleText) {
+	reddit.auth(accessToken).then(function() {
+		console.log("Before POST");
+		return reddit('/api/submit').post({
+			api_type: "json",
+			kind: "link",
+			sr: "HummHumm",
+			title: titleText,
+			then: "comments",
+			url: link
+		});
+	}).then(function(data) {
+		console.log("After POST : ");
+		console.log(data);
+	});
 }

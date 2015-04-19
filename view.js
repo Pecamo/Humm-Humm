@@ -67,6 +67,7 @@ $(document).on('click', '#upload', function () {
 		contentType: false
 	}).done(function (data) {
 		console.log(data);
+		postLink(data, "Trop du test");
 	});
 });
 
