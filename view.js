@@ -73,10 +73,10 @@ $(document).on('click', '#record:not(.disabled)', function () {
 $(document).on('click', '#stop:not(.disabled)', function () {
 	$.voice.export(function (blob) {
 		globlob = blob;
-		bloburl = URL.createObjectURL(blob)
+		globurl = URL.createObjectURL(blob)
 		$.voice.stop();
 		
-		$('#audio').attr('src', URL.createObjectURL(blob));
+		$('#audio').attr('src', globurl);
 		$('#download').removeClass('disabled');
 		$('#record').removeClass('disabled');
 		$('#stop').addClass('disabled');
@@ -96,7 +96,7 @@ $(document).on('click', '#upload', function () {
 	//console.log(blob);
 	var fd = new FormData();
 	fd.append('fname', 'upload.wav');
-	fd.append('data', blob);
+	fd.append('data', globlob);
 	
 	$.ajax({
 		type: 'POST',
