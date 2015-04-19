@@ -6,6 +6,7 @@ from os import curdir, sep
 from helpers import *
 from pymongo import MongoClient
 import gridfs
+import re
 from bson.objectid import ObjectId
 
 CWD = os.path.abspath('.')
@@ -22,14 +23,14 @@ fs = gridfs.GridFS(db)
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
 
-        self.path = self.path.split("?")[0]
+        path = self.path.split("?")[0]
 
         try:
-            send_type = get_res_type(self.path).value
+            send_type = get_res_type(path).value
             if self.path == "/":
                 path = main_file
             else:
-                path = self.path[1:]
+                path = path[1:]
 
             path = curdir + sep + path
 
@@ -42,15 +43,26 @@ class MyServer(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path.split("/")[-1] == "sounds":
-            length = self.headers['content-length']
-            data = self.rfile.read(int(length))
+            data = self.get_post_data()
             ref = fs.put(data)
 
-            response = "player/" + str(ref)
+            response = "/player/" + str(ref)
 
             self.send_text(response)
         else:
             self.send_error(400, "Cannot upload here.")
+
+    def get_post_data(self) -> bytes:
+        remaining_bytes = int(self.headers['content-length'])
+        line = self.rfile.readline()
+        remaining_bytes -= len(line)
+        line = self.rfile.readline()
+        remaining_bytes -= len(line)
+        line = self.rfile.readline()
+        remaining_bytes -= len(line)
+        line = self.rfile.readline()
+        remaining_bytes -= len(line)
+        return self.rfile.read(int(remaining_bytes))
 
     def send_html(self, path: str):
         self.send_path(200, [("Content-type", "text/html")], path)
