@@ -37,5 +37,5 @@ for submission in submissions:
                         line = line.replace(tag, '')
                         res = search(line)
                         print(res)
-                        comm.reply(res)
+                        comm.reply("[" + line + "](" + res + ")")
                         collection.insert_one({"sub_id": submission.id})
