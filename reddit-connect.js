@@ -1,20 +1,9 @@
 function login() {
-    var Snoocore = window.Snoocore;
-    var hash = window.location.hash;
+	var poney = reddit.getImplicitAuthUrl();
+	document.location = poney;
+}
 
-    var reddit = new Snoocore({
-	  userAgent: 'HummHumm Web',
-	  oauth: {
-	    type: 'implicit',
-	    consumerKey: 'qVjwB7K3EUJBBg',
-	    redirectUri: "http://localhost:31415",
-	    scope: [ 'identity', 'vote', 'submit', 'read' ],
-	    expires_in: 7200
-	  }
-	});
-
-	console.log("HEy");
-
+function postLink() {
 	var poney = reddit.getImplicitAuthUrl();
 	console.log(poney)
 	document.location = poney;
