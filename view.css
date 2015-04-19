@@ -207,6 +207,10 @@ a:visited {
 }
 
 
+#post .score {
+	top: -6px;
+}
+
 .score .up {
 	width: 0;
 	height: 0;
