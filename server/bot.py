@@ -29,9 +29,9 @@ submissions = subreddit.get_new(limit=100)
 current_time = time.time()
 for submission in submissions:
     sub_age = (current_time - submission.created_utc) / 60 / 60 / 24
-    if sub_age < 1 and submission.comments != []:
+    if sub_age < 1 and submission.comments != [] and collection.find_one({"sub_id": submission.id}) is None:
         for comm in submission.comments:
-            if tag in comm.body and "http" not in comm.body and collection.find_one({"sub_id": submission.id}) is None:
+            if tag in comm.body and "http" not in comm.body:
                 for line in comm.body.split("\n"):
                     if tag in line:
                         line = line.replace(tag, '')
