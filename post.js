@@ -9,7 +9,7 @@ var reddit = new Snoocore({
 		type: 'implicit',
 		consumerKey: 'wtf',
 		redirectUri: 'wtf',
-		scope: [ 'read' ]
+		scope: [ 'read', 'submit' ]
 	}
 });
 
@@ -27,6 +27,8 @@ $(function() {
 		console.log(data)
 		var post = data[0].data.children[0].data
 		var comments = data[1].data.children
+
+		console.log(post)
 
 		var html = '<a href="https://www.reddit.com/r/' + post.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
 
@@ -52,7 +54,7 @@ $(function() {
 							moment(new Date(c.created_utc * 1000)).fromNow() +
 						'</a>' +
 					'<small/>' +
-				'<div/>' +
+				'</div>' +
 			'</div>';
 		}
 
@@ -60,6 +62,29 @@ $(function() {
 			html += '<div class="post"><p><em>There is no answer yet.</em></p></div>'
 		}
 
-		$('#comments').html(html)
+		html += '<div class="post">' +
+			'<h3>Do you know this song?</h3>' +
+			'<input type="text" name="artist" id="input-artist" placeholder="Artist"><br>' +
+			'<input type="text" name="title" id="input-title" placeholder="Title">'+
+			'<button id="post-comment">Send answer</button>'+
+		'</div>';
+
+		$('#comments').html(html);
+
+		$(document).on('click', '#post-comment', function (e) {
+			var artist = $('#input-artist').val()
+			var title = $('#input-title').val()
+			var params = {
+				api_type: "json",
+				text: artist + ' - ' + title,
+				thing_id: post.link_id
+			}
+
+			reddit.auth(ACCESS_TOKEN).then(function() {
+				return reddit('/r/hummhumm/comments/'+postId).post(params)
+			}).then(function(data) {
+				console.log(data);
+			});
+		})
 	});
 })
