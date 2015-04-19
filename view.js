@@ -135,16 +135,22 @@ $(document).on('click', '#login-button:not(.disabled)', function() {
 var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
 var accessToken = match ? match[1] : '';
 
-function showCaptcha(url) {
+function showCaptcha(link, titleText, url, iden) {
 	$('#captcha').show();
 	$('#captcha:not(:has(#captcha-img))').append(
 		'<p>Please enter what you see :</p>' +
 		'<img id="captcha-img" src="' + url + '"></img>' +
 		'<div>' +
 			'<input type="text" id="captcha-input"></input>' +
-			'<button type="submit">Submit</button>' +
+			'<button type="submit" id="captcha-submit">Submit</button>' +
 		'</div>'
 	);
+
+	$(document).on('click', '#captcha-submit', function () {
+		var captchaCode = $("#captcha-input").val();
+		postLink(link, titleText, iden, captchaCode);
+		$("#captcha-input").hide();
+	});
 }
 
 function addPost() {

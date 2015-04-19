@@ -3,17 +3,23 @@ function login() {
 	document.location = poney;
 }
 
-function postLink(link, titleText) {
-	reddit.auth(accessToken).then(function() {
-		console.log("Before POST");
-		return reddit('/api/submit').post({
+function postLink(link, titleText, captchaIdentifier, captchaCode) {
+	var params = {
 			api_type: "json",
 			kind: "link",
 			sr: "HummHumm",
 			title: titleText,
 			then: "comments",
 			url: link
-		});
+		};
+	if (typeof captchaIdentifier === 'undefined') {}
+	else { 
+		params.iden = captchaIdentifier;
+		params.captcha = captchaCode;
+	}
+	reddit.auth(accessToken).then(function() {
+		console.log("Before POST");
+		return reddit('/api/submit').post(params);
 	}).then(function(data) {
 		console.log("After POST : ");
 		console.log(data);
@@ -22,8 +28,7 @@ function postLink(link, titleText) {
 		var object = jQuery.parseJSON(body);
 		var iden = object.json.captcha;
 		console.log(iden);
-		showCaptcha("https://www.reddit.com/captcha/"+iden);
-		//askToSolve(iden);
+		showCaptcha(link, titleText, "https://www.reddit.com/captcha/"+iden, iden);
 	});
 }
 
