@@ -116,14 +116,34 @@ $(document).on('click', '#record:not(.disabled)', function () {
 // Votes
 $(document).on('click', '.up', function () {
 	console.log('scores', 'up', $(this), $(this).attr('data-name'))
+
 	var params = {
 		dir: 1,
-		id: $('data-name')
+		id: $(this).attr('data-name')
 	}
 
 	reddit.auth(accessToken).then(function() {
 		return reddit('/api/vote').post(params)
 	}).then(function(data) {
+		$(this).css('border-bottom-color': 'orange')
+		$(this).parent().find('p').html(parseInt($(this).parent().find('p').html()) + 1)
+		console.log(data);
+	});
+});
+
+$(document).on('click', '.down', function () {
+	console.log('scores', 'down', $(this), $(this).attr('data-name'))
+
+	var params = {
+		dir: -1,
+		id: $(this).attr('data-name')
+	}
+
+	reddit.auth(accessToken).then(function() {
+		return reddit('/api/vote').post(params)
+	}).then(function(data) {
+		$(this).css('border-bottom-color': 'purple')
+		$(this).parent().find('p').html(parseInt($(this).parent().find('p').html()) - 1)
 		console.log(data);
 	});
 });
