@@ -3,7 +3,7 @@ function login() {
 	document.location = poney;
 }
 
-function postLink(link, titleText, captchaIdentifier, captchaCode) {
+function postLink(link, titleText, iden, captchaCode) {
 	var params = {
 			api_type: "json",
 			kind: "link",
@@ -12,9 +12,9 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 			then: "comments",
 			url: link
 		};
-	if (typeof captchaIdentifier !== 'undefined') {
-		console.log("if (typeof captchaIdentifier !== 'undefined') {", captchaIdentifier, captchaCode)
-		params.iden = captchaIdentifier;
+	if (typeof iden !== 'undefined') {
+		console.log("if (typeof iden !== 'undefined') {", iden, captchaCode)
+		params.iden = iden;
 		params.captcha = captchaCode;
 	}
 	reddit.auth(accessToken).then(function() {
@@ -28,41 +28,10 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 	}).catch(function(data) {
 		var body = data.body;
 		var object = jQuery.parseJSON(body);
-		var iden = object.json.captcha;
-		console.log('data, body, object', data, body, object)
-		console.log("Identifier : " + iden);
-		console.log("CAPTCHA : " + captchaIdentifier);
-		showCaptcha(link, titleText, "https://www.reddit.com/captcha/"+iden, iden);
-	});
-}
-
-function needsCaptcha() {
-	reddit.auth(accessToken).then(function() {
-		return reddit('/api/needs_captcha').get();
-	}).then(function(data) {
-		console.log("After POST : ");
-		console.log(data);
-	});
-}
-
-function newCaptcha() {
-	return reddit.auth(accessToken).then(function() {
-		return reddit('/api/new_captcha').post({
-			api_type: "json"
-		});
-	}).then(function(data) {
-		console.log("After POST : ");
-		console.log(data);		
-	});
-}
-
-function askToSolve(identifier) {
-	reddit.auth(accessToken).then(function() {
-		return reddit('/captcha/$iden').get({
-			$iden: identifier
-		});
-	}).then(function(data) {
-		console.log("After POST : ");
-		console.log(data);		
+		var newIden = object.json.captcha;
+		console.log('object', object)
+		console.log("New Identifier : " + newIden);
+		console.log("CAPTCHA : " + captchaCode);
+		showCaptcha(link, titleText, newIden);
 	});
 }

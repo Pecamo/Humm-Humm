@@ -127,7 +127,7 @@ $(document).on('click', '#upload', function () {
 	}).done(function (data) {
 		console.log(data);
 		console.log(title);
-		postLink(data, title);
+		postLink("http://loki.cpfk.net:31415"+data, title);
 	});
 
 });
@@ -141,11 +141,11 @@ $(document).on('click', '#login-button:not(.disabled)', function() {
 var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
 var accessToken = match ? match[1] : '';
 
-function showCaptcha(link, titleText, url, iden) {
+function showCaptcha(link, titleText, iden) {
 	$('#captcha').show();
 	$('#captcha:not(:has(#captcha-img))').append(
 		'<p>Please enter what you see :</p>' +
-		'<img id="captcha-img" src="' + url + '"></img>' +
+		'<img id="captcha-img" src="' + "https://www.reddit.com/captcha/" + iden + '"></img>' +
 		'<div>' +
 			'<input type="text" id="captcha-input"></input>' +
 			'<button type="submit" id="captcha-submit">Submit</button>' +
