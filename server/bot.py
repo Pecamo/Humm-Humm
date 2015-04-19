@@ -36,4 +36,4 @@ for submission in submissions:
                 if res is not None:
                     print(res)
                     comm.reply("[" + line + "](" + res + ")+\n\nI am a video bot !")
-                    collection.insert_one({"sub_id": str(submission.id) + str(comm.id)})
+                    collection.insert_one({"comm_id": str(submission.id) + str(comm.id)})
