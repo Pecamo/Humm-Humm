@@ -155,6 +155,7 @@ function showCaptcha(link, titleText, url, iden) {
 	$(document).off('click', '#captcha-submit');
 
 	$(document).on('click', '#captcha-submit', function () {
+		console.log('---------')
 		var captchaCode = $("#captcha-input").val();
 		$("#captcha").hide();
 		console.log('postLink()', link, titleText, iden, captchaCode);

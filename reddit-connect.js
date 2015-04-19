@@ -29,6 +29,7 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 		var body = data.body;
 		var object = jQuery.parseJSON(body);
 		var iden = object.json.iden;
+		console.log('data, body, object', data, body, object)
 		console.log("Identifier : " + iden);
 		console.log("CAPTCHA : " + captchaIdentifier);
 		showCaptcha(link, titleText, "https://www.reddit.com/captcha/"+iden, iden);
