@@ -17,6 +17,12 @@ function postLink(link, titleText) {
 	}).then(function(data) {
 		console.log("After POST : ");
 		console.log(data);
+	}).catch(function(data) {
+		var body = data.body;
+		var object = jQuery.parseJSON(body);
+		var iden = object.json.captcha;
+		console.log(iden);
+		askToSolve(iden);
 	});
 }
 
@@ -30,7 +36,7 @@ function needsCaptcha() {
 }
 
 function newCaptcha() {
-	reddit.auth(accessToken).then(function() {
+	return reddit.auth(accessToken).then(function() {
 		return reddit('/api/new_captcha').post({
 			api_type: "json"
 		});
@@ -40,7 +46,7 @@ function newCaptcha() {
 	});
 }
 
-function captchaIden(identifier) {
+function askToSolve(identifier) {
 	reddit.auth(accessToken).then(function() {
 		return reddit('/captcha/$iden').get({
 			$iden: identifier
