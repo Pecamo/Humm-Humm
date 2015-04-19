@@ -140,10 +140,12 @@ var accessToken = match ? match[1] : '';
 function showCaptcha(url) {
 	$('#captcha').show();
 	$('#captcha:not(:has(#captcha-img))').append(
-		'Please enter what you see : ' +
-		'<img id="captcha-img" src="' + url + '"><img>' +
-		'<input type="text" id="captcha-input">' +
-		'<button type="submit">Submit</button>'
+		'<p>Please enter what you see :</p>' +
+		'<img id="captcha-img" src="' + url + '"></img>' +
+		'<div>' +
+			'<input type="text" id="captcha-input"></input>' +
+			'<button type="submit">Submit</button>' +
+		'</div>'
 	);
 }
 
