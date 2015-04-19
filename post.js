@@ -7,8 +7,8 @@ var reddit = new Snoocore({
 	throttle: 1000,
 	oauth: {
 		type: 'implicit',
-		consumerKey: 'qVjwB7K3EUJBBg',
-		redirectUri: 'http://localhost:31415/reddit-test.html',
+		consumerKey: 'wtf',
+		redirectUri: 'wtf',
 		scope: [ 'read' ]
 	}
 });
@@ -25,9 +25,12 @@ $(function() {
 		return reddit('/r/programming/comments/'+postId).get()
 	}).then(function(data) {
 		console.log(data)
+		var post = data[0].data.children[0].data
 		var comments = data[1].data.children
 
-		var html = '<a href="https://www.reddit.com/r/' + data[0].data.children[0].data.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
+		var html = '<a href="https://www.reddit.com/r/' + post.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
+
+		$('#audio').html('<audio controls preload autoplay load><source src="' + post.url + '" type="audio/wav"></audio>')
 
 		for (var i = 0, l = comments.length; i < l; i++) {
 			var c = comments[i].data;

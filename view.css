@@ -144,3 +144,7 @@ button.disabled{
 	
 	background-color: white;
 }
+
+#post #audio {
+	margin: 10px;
+}
