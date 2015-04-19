@@ -2,6 +2,7 @@ $(function() {
 	$('#download').addClass('disabled');
 
 	if (accessToken) {
+		localStorage.setItem('accessToken', accessToken);
 		alert("I THINK YOU ARE FUCKING LOGGED IN");
 		$("#login").hide();
 	}

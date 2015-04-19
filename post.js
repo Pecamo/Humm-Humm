@@ -1,4 +1,4 @@
-var ACCESS_TOKEN = "27496966-2GhMd8Gh8lwo7yKkm58M3UVuE-o"
+var ACCESS_TOKEN = localStorage.getItem('accessToken');
 var Snoocore = window.Snoocore;
 var hash = window.location.hash;
 
