@@ -126,6 +126,7 @@ $(document).on('click', '.up', function () {
 		return reddit('/api/vote').post(params)
 	}).then(function(data) {
 		me.css('border-bottom-color', 'orange')
+		me.parent().find('.down').css('border-top-color', 'gray')
 		me.parent().find('p').html(parseInt(me.parent().find('p').html()) + 1)
 		console.log(data);
 	});
@@ -133,7 +134,7 @@ $(document).on('click', '.up', function () {
 
 $(document).on('click', '.down', function () {
 	var me = $(this);
-	
+
 	var params = {
 		dir: -1,
 		id: me.attr('data-name')
@@ -142,7 +143,8 @@ $(document).on('click', '.down', function () {
 	reddit.auth(accessToken).then(function() {
 		return reddit('/api/vote').post(params)
 	}).then(function(data) {
-		me.css('border-bottom-color', 'purple')
+		me.css('border-top-color', 'purple')
+		me.parent().find('.up').css('border-bottom-color', 'gray')
 		me.parent().find('p').html(parseInt(me.parent().find('p').html()) - 1)
 		console.log(data);
 	});
