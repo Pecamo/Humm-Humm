@@ -126,8 +126,9 @@ $(document).on('click', '#download:not(.disabled)', function () {
 	$('<a href="'+globurl+'" download="Recording.wav"></a>')[0].click();
 });
 
-$(document).on('click', '#upload', function () {
+$(document).on('click', '#upload:not(.disabled)', function () {
 	//console.log(blob);
+	$('#upload').addClass('disabled');
 	var fd = new FormData();
 	var title = $("#input-title").val();
 	fd.append('fname', 'upload.wav');
@@ -143,6 +144,7 @@ $(document).on('click', '#upload', function () {
 		console.log(data);
 		console.log(title);
 		postLink("http://loki.cpfk.net:31415"+data, title);
+		location.reload();
 	});
 
 });
@@ -161,13 +163,10 @@ function showCaptcha(link, titleText, iden) {
 			'<button type="submit" id="captcha-submit">Submit</button>' +
 		'</div>'
 	);
-	
-	$('#captcha-submit').removeClass('disabled');
 
 	$(document).off('click', '#captcha-submit');
 
-	$(document).on('click', '#captcha-submit:not(.disabled)', function () {
-		$('#captcha-submit').addClass('disabled');
+	$(document).on('click', '#captcha-submit', function () {
 		console.log('---------');
 		var captchaCode = $("#captcha-input").val();
 		$("#captcha").hide();
