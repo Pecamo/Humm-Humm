@@ -58,7 +58,8 @@ $(function() {
 	});
 });
 
-var blob = "";
+var globlob = "";
+var globurl = "";
 
 // Audio capture button actions
 $(document).on('click', '#record:not(.disabled)', function () {
@@ -70,11 +71,12 @@ $(document).on('click', '#record:not(.disabled)', function () {
 });
 
 $(document).on('click', '#stop:not(.disabled)', function () {
-	$.voice.export(function (url) {
-		blob = url;
+	$.voice.export(function (blob) {
+		globlob = blob;
+		bloburl = URL.createObjectURL(blob)
 		$.voice.stop();
 		
-		$('#audio').attr('src', url);
+		$('#audio').attr('src', URL.createObjectURL(blob));
 		$('#download').removeClass('disabled');
 		$('#record').removeClass('disabled');
 		$('#stop').addClass('disabled');
@@ -83,15 +85,15 @@ $(document).on('click', '#stop:not(.disabled)', function () {
 			'<button id="upload">Create a post</button>' +
 			'</div>'
 		);
-	}, 'URL');
+	}, 'blob');
 });
 
 $(document).on('click', '#download:not(.disabled)', function () {
-	$('<a href="'+blob+'" download="Recording.wav"></a>')[0].click();
+	$('<a href="'+globurl+'" download="Recording.wav"></a>')[0].click();
 });
 
 $(document).on('click', '#upload', function () {
-	console.log(blob);
+	//console.log(blob);
 	var fd = new FormData();
 	fd.append('fname', 'upload.wav');
 	fd.append('data', blob);
