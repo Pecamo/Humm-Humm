@@ -13,14 +13,19 @@ var reddit = new Snoocore({
 	}
 });
 
+
+if (document.location.href.split('?').length < 2) {
+	document.location = '/'
+}
+
+var postId = document.location.href.split('?')[1]
+
 $(function() {
 	reddit.auth(ACCESS_TOKEN).then(function() {
-		return reddit('/r/programming/comments/330zmm').get()
+		return reddit('/r/programming/comments/'+postId).get()
 	}).then(function(data) {
 		console.log(data)
 		var comments = data[1].data.children
-		
-		var postId = data[0].data.children[0].data.id
 
 		var html = '<a href="https://www.reddit.com/r/' + data[0].data.children[0].data.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
 
