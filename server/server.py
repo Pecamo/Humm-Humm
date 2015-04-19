@@ -8,6 +8,7 @@ from pymongo import MongoClient
 import gridfs
 import cgi, cgitb
 from bson.objectid import ObjectId
+from socketserver import ThreadingMixIn
 
 CWD = os.path.abspath('.')
 
@@ -20,7 +21,7 @@ db = MongoClient().humm_humm
 fs = gridfs.GridFS(db)
 
 
-class MyServer(BaseHTTPRequestHandler):
+class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
 
         path = self.path.split("?")[0]
@@ -96,9 +97,10 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(file.read())
 
 
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    """Handle requests in a separate thread."""
 
-
-myServer = HTTPServer((hostName, hostPort), MyServer)
+myServer = ThreadedHTTPServer((hostName, hostPort), Handler)
 
 print("Server Starts :", hostName, "-", hostPort)
 
