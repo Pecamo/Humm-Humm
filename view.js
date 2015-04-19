@@ -47,7 +47,7 @@ $(document).on('click', '#upload', function () {
 	
 	$.ajax({
 		type: 'POST',
-		url: '/sound',
+		url: '/sounds',
 		data: fd,
 		processData: false,
 		contentType: false
