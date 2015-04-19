@@ -38,8 +38,8 @@ $(function() {
 
 			for (var j = 0, k = comments2.length; j < k; j++) {
 				var cc = comments2[j];
-				if (cc.author === "humm_youtube") {
-					youtubeId = str.match(/\[(.*)\]\((.*)\)/)[2].match(/watch\?v=(.*)/)[1];
+				if (cc.data.author === "humm_youtube") {
+					youtubeId = cc.data.body.match(/\[(.*)\]\((.*)\)/)[2].match(/watch\?v=(.*)/)[1];
 				}
 			}
 			
