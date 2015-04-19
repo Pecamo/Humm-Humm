@@ -14,6 +14,6 @@ for submission in submissions:
             for rep in comment.replies:
                 tagged = [tag for tag in tags if tag in str(rep)]
                 if len(tagged) > 0:
-                    if rep.author == comment.author:
+                    if rep.author == submission.author:
                         print("YAY")
                         submission.set_flair(solved_flair)
