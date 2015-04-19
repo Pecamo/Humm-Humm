@@ -47,10 +47,8 @@ $(function() {
 							c.author +
 						'</a>' +
 						' &middot; ' +
-						moment(new Date(c.created * 1000)).fromNow() +
-						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '">' +
-							'view/post replies' +
+						'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
+							moment(new Date(c.created * 1000)).fromNow() +
 						'</a>' +
 					'</div>' +
 				'</div>' +
