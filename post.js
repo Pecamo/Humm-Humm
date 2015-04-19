@@ -109,6 +109,7 @@ $(function() {
 				return reddit('/api/comment').post(params)
 			}).then(function(data) {
 				console.log(data);
+				document.location = document.location;
 			});
 		})
 	});
