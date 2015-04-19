@@ -28,7 +28,7 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 	}).catch(function(data) {
 		var body = data.body;
 		var object = jQuery.parseJSON(body);
-		var iden = object.json.iden;
+		var iden = object.json.captcha;
 		console.log('data, body, object', data, body, object)
 		console.log("Identifier : " + iden);
 		console.log("CAPTCHA : " + captchaIdentifier);
