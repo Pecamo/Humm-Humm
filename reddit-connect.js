@@ -28,8 +28,9 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 	}).catch(function(data) {
 		var body = data.body;
 		var object = jQuery.parseJSON(body);
-		var iden = object.json.captcha;
-		console.log(iden);
+		var iden = object.json.iden;
+		console.log("Identifier : " + iden);
+		console.log("CAPTCHA : " + captchaIdentifier);
 		showCaptcha(link, titleText, "https://www.reddit.com/captcha/"+iden, iden);
 	});
 }
