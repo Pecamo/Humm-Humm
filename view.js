@@ -2,14 +2,14 @@ var Snoocore = window.Snoocore;
 var hash = window.location.hash;
 
 var reddit = new Snoocore({
-  userAgent: 'HummHumm Web',
-  oauth: {
-    type: 'implicit',
-    consumerKey: 'qVjwB7K3EUJBBg',
-    redirectUri: "http://localhost:31415",
-    scope: [ 'identity', 'vote', 'submit', 'read' ],
-    expires_in: 7200
-  }
+	userAgent: 'HummHumm Web',
+	oauth: {
+		type: 'implicit',
+		consumerKey: 'qVjwB7K3EUJBBg',
+		redirectUri: "http://localhost:31415",
+		scope: [ 'identity', 'vote', 'submit', 'read' ],
+		expires_in: 7200
+	}
 });
 
 $(function() {
@@ -19,6 +19,43 @@ $(function() {
 		localStorage.setItem('accessToken', accessToken);
 		$("#login").hide();
 	}
+
+	reddit.auth(accessToken).then(function() {
+		return reddit('/r/programming/hot').get()
+	}).then(function(data) {
+		console.log(data)
+		var posts = data.data.children
+
+		// var html = '<a href="https://www.reddit.com/r/' + post.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
+
+		// $('#audio').html('<audio controls preload autoplay load><source src="' + post.url + '" type="audio/wav"></audio>')
+
+		var html = ''
+
+		for (var i = 0, l = posts.length; i < l; i++) {
+			var p = posts[i].data;
+
+			html +=
+			'<div class="post">' +
+				'<h3 class="title">' +
+					'<a href="/post.html?' + p.id + '">' +
+						p.title +
+					'</a>' +
+				'</h3>' +
+				'<div class="footer">' +
+					'<a href="https://www.reddit.com/user/' + p.author + '">' +
+						p.author +
+					'</a>' +
+					' &middot; ' +
+					'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+						moment(new Date(p.created_utc * 1000)).fromNow() +
+					'</a>' +
+				'</div>' +
+			'</div>';
+		}
+
+		$('#posts').html(html)
+	});
 });
 
 var blob = "";
@@ -68,12 +105,6 @@ $(document).on('click', '#upload', function () {
 	}).done(function (data) {
 		console.log(data);
 	});
-});
-
-$(document).on('click', '.post', function () {
-	console.log("test");
-	var win = window.open('https://www.reddit.com/r/HummHumm', '_blank');
-	win.focus();
 });
 
 $(document).on('click', '#login-button:not(.disabled)', function() {

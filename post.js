@@ -43,16 +43,19 @@ $(function() {
 					decoded +
 				'</div>' +
 				'<div class="footer">' +
-						'<a href="https://www.reddit.com/r/' + c.author + '">' +
-							c.author +
-						'</a>' +
-						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
-							moment(new Date(c.created * 1000)).fromNow() +
-						'</a>' +
-					'</div>' +
+					'<a href="https://www.reddit.com/user/' + c.author + '">' +
+						c.author +
+					'</a>' +
+					' &middot; ' +
+					'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
+						moment(new Date(c.created_utc * 1000)).fromNow() +
+					'</a>' +
 				'</div>' +
 			'</div>';
+		}
+
+		if (comments.length === 0) {
+			html += '<div class="post"><p><em>There is no answer yet.</em></p></div>'
 		}
 
 		$('#comments').html(html)
