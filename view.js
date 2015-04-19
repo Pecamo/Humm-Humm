@@ -1,5 +1,10 @@
 $(function() {
 	$('#download').addClass('disabled');
+
+	if (accessToken) {
+		alert("I THINK YOU ARE FUCKING LOGGED IN");
+		$("#login").hide();
+	}
 });
 
 var blob = "";
@@ -11,20 +16,6 @@ $(document).on('click', '#record:not(.disabled)', function () {
 		$('#stop').removeClass('disabled');
 		$('#humming-info').html('Recording...');
 	});
-
-	$(document).on('click', '#login-button:not(.disabled)', function() {
-		login();
-	});
-
-	// Check if we have an access token in the hash, if so
-   // we can authenticate with reddit and make our call!
-   var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
-   var accessToken = match ? match[1] : '';
-
-   if (accessToken) {
-   		alert("I THINK YOU ARE FUCKING LOGGED IN");
-   		$("#login").hide();
-   }
 });
 
 $(document).on('click', '#stop:not(.disabled)', function () {
@@ -70,6 +61,15 @@ $(document).on('click', '.post', function () {
 	var win = window.open('https://www.reddit.com/r/HummHumm', '_blank');
 	win.focus();
 });
+
+$(document).on('click', '#login-button:not(.disabled)', function() {
+	login();
+});
+
+// Check if we have an access token in the hash, if so
+// we can authenticate with reddit and make our call!
+var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
+var accessToken = match ? match[1] : '';
 
 function addPost() {
 	$('#reddit').append(
