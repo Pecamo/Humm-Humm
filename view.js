@@ -1,3 +1,17 @@
+var Snoocore = window.Snoocore;
+var hash = window.location.hash;
+
+var reddit = new Snoocore({
+  userAgent: 'HummHumm Web',
+  oauth: {
+    type: 'implicit',
+    consumerKey: 'qVjwB7K3EUJBBg',
+    redirectUri: "http://localhost:31415",
+    scope: [ 'identity', 'vote', 'submit', 'read' ],
+    expires_in: 7200
+  }
+});
+
 $(function() {
 	$('#download').addClass('disabled');
 
