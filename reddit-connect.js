@@ -22,7 +22,8 @@ function postLink(link, titleText) {
 		var object = jQuery.parseJSON(body);
 		var iden = object.json.captcha;
 		console.log(iden);
-		askToSolve(iden);
+		showCaptcha("https://www.reddit.com/captcha/"+iden);
+		//askToSolve(iden);
 	});
 }
 

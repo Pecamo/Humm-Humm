@@ -111,8 +111,6 @@ $(document).on('click', '#upload', function () {
 	var title = $("#input-title").val();
 	fd.append('fname', 'upload.wav');
 	fd.append('data', globlob);
-
-	showCaptcha("favicon.ico");
 	
 	$.ajax({
 		type: 'POST',
