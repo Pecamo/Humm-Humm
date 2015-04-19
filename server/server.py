@@ -22,6 +22,8 @@ fs = gridfs.GridFS(db)
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
 
+        self.path = self.path.split("?")[0]
+
         try:
             send_type = get_res_type(self.path).value
             if self.path == "/":
