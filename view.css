@@ -36,6 +36,14 @@ html, body {
 	margin-bottom: 20px;
 }
 
+#humm-humm  a{
+	text-decoration: none;
+	
+	color: black;
+	
+	font-size: 30px;
+}
+
 #login-button {
 	margin-top: 50px;
 }
