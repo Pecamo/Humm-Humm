@@ -47,12 +47,13 @@ $(function() {
 
 		for (var i = 0, l = posts.length; i < l; i++) {
 			var p = posts[i].data;
+			console.log(p);
 
 			var scores =
 			'<div class="score">' +
-				'<div class="up"></div>' +
+				'<div class="up" data-name="' + p.name + '"></div>' +
 				  '<p>' + (p.ups - p.downs) + '</p>' +
-				'<div class="down"></div>' +
+				'<div class="down" data-name="' + p.name + '"></div>' +
 			'</div>';
 			
 			html +=
@@ -109,6 +110,21 @@ $(document).on('click', '#record:not(.disabled)', function () {
 		}, 200);
 
 		$('#humming-info').html(html);
+	});
+});
+
+// Votes
+$(document).on('click', '.up', function () {
+	console.log('scores', 'up', $(this), $(this).attr('data-name'))
+	var params = {
+		dir: 1,
+		id: $('data-name')
+	}
+
+	reddit.auth(accessToken).then(function() {
+		return reddit('/api/vote').post(params)
+	}).then(function(data) {
+		console.log(data);
 	});
 });
 
