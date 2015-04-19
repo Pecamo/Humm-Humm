@@ -37,6 +37,10 @@ html, body {
 	margin-bottom: 20px;
 }
 
+#login-button {
+	margin-top: 50px;
+}
+
 #login,
 #audio-capture,
 #captcha {
