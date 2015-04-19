@@ -13,6 +13,11 @@ var reddit = new Snoocore({
 	}
 });
 
+// Check if we have an access token in the hash, if so
+// we can authenticate with reddit and make our call!
+var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
+var accessToken = match ? match[1] : '';
+
 $(function() {
 	$('#captcha').hide();
 	$('#download').addClass('disabled');
@@ -144,11 +149,6 @@ $(document).on('click', '#upload', function () {
 $(document).on('click', '#login-button:not(.disabled)', function() {
 	login();
 });
-
-// Check if we have an access token in the hash, if so
-// we can authenticate with reddit and make our call!
-var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
-var accessToken = match ? match[1] : '';
 
 function showCaptcha(link, titleText, iden) {
 	$('#captcha').show();
