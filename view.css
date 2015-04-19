@@ -171,3 +171,11 @@ button.disabled{
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
+
+a:link {
+	color: #5B92FA;
+}
+
+a:visited {
+	color: #7D6194;
+}
