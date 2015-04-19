@@ -80,7 +80,7 @@ $(function() {
 			}
 
 			reddit.auth(ACCESS_TOKEN).then(function() {
-				return reddit('/r/hummhumm/comments/'+postId).post(params)
+				return reddit('/api/comment').post(params)
 			}).then(function(data) {
 				console.log(data);
 			});
