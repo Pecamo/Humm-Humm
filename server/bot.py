@@ -27,6 +27,7 @@ for submission in submissions:
     sub_age = (current_time - submission.created_utc) / 60 / 60 / 24
     if sub_age < 1 and submission.comments != []:
         for comm in submission.comments:
+            print(comm)
             if tag in comm.body and "http" not in comm.body:
                 for line in comm.body.split("\n"):
                     if tag in line:
