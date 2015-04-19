@@ -67,6 +67,11 @@ html, body {
 	z-index: 10;
 }
 
+#captcha * {
+	margin: 5px;
+	padding: 2px;
+}
+
 #hum-here {
 	font-size: 20px;
 	margin-bottom: 10px;

@@ -128,9 +128,10 @@ var accessToken = match ? match[1] : '';
 
 function showCaptcha(url) {
 	$('#captcha').show();
-	$('#captcha').append(
-		'<img src="' + url + '"><img>' +
-		'<button type="submit">submit</button>'
+	$('#captcha:not(:has(#captcha-img))').append(
+		'<img id="captcha-img" src="' + url + '"><img>' +
+		'<input type="text" id="captcha-input">' +
+		'<button type="submit">Submit</button>'
 	);
 }
 
