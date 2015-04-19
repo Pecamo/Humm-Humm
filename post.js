@@ -27,14 +27,13 @@ $(function() {
 		var post = data[0].data.children[0].data
 		var comments = data[1].data.children
 
-		console.log(post)
-
 		var html = '<a href="https://www.reddit.com/r/' + post.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
 
 		$('#audio').html('<audio controls autoplay preload loop><source src="' + post.url.replace("player", "sounds") + '" type="audio/wav"></audio>')
 
 		for (var i = 0, l = comments.length; i < l; i++) {
 			var c = comments[i].data;
+			console.log(c.replies)
 			
 			var decoded = $("<div/>").html(c.body_html).text();
 
