@@ -7,7 +7,7 @@ function login() {
 	  oauth: {
 	    type: 'implicit',
 	    consumerKey: 'qVjwB7K3EUJBBg',
-	    redirectUri: document.location.href,
+	    redirectUri: "http://localhost:31415",
 	    scope: [ 'identity', 'vote', 'submit', 'read' ],
 	    expires_in: 7200
 	  }

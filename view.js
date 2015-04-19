@@ -2,7 +2,6 @@ $(function() {
 	$('#download').addClass('disabled');
 
 	if (accessToken) {
-		alert("I THINK YOU ARE FUCKING LOGGED IN");
 		$("#login").hide();
 	}
 });
