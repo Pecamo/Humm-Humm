@@ -238,7 +238,7 @@ a:visited {
 	clear: both;
 }
 
-.score {
+.score:after {
 	content:'';
 	display:block;
 	clear: both;
