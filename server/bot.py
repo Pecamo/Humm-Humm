@@ -1,8 +1,12 @@
 import praw
 import time
 from html.parser import HTMLParser
-import requests
+from pymongo import MongoClient
 from youtube_search import search
+
+db = MongoClient().bot
+collection = db.memory
+
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -27,10 +31,11 @@ for submission in submissions:
     sub_age = (current_time - submission.created_utc) / 60 / 60 / 24
     if sub_age < 1 and submission.comments != []:
         for comm in submission.comments:
-            if tag in comm.body and "http" not in comm.body:
+            if tag in comm.body and "http" not in comm.body and collection.find_one({"sub_id": submission.id}) is None:
                 for line in comm.body.split("\n"):
                     if tag in line:
                         line = line.replace(tag, '')
                         res = search(line)
                         print(res)
                         comm.reply(res)
+                        collection.insert_one({"sub_id": submission.id})
