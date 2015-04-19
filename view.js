@@ -125,7 +125,7 @@ $(document).on('click', '.up', function () {
 	reddit.auth(accessToken).then(function() {
 		return reddit('/api/vote').post(params)
 	}).then(function(data) {
-		$(this).css('border-bottom-color': 'orange')
+		$(this).css('border-bottom-color', 'orange')
 		$(this).parent().find('p').html(parseInt($(this).parent().find('p').html()) + 1)
 		console.log(data);
 	});
@@ -142,7 +142,7 @@ $(document).on('click', '.down', function () {
 	reddit.auth(accessToken).then(function() {
 		return reddit('/api/vote').post(params)
 	}).then(function(data) {
-		$(this).css('border-bottom-color': 'purple')
+		$(this).css('border-bottom-color', 'purple')
 		$(this).parent().find('p').html(parseInt($(this).parent().find('p').html()) - 1)
 		console.log(data);
 	});
