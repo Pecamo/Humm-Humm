@@ -8,7 +8,8 @@ var reddit = new Snoocore({
 		consumerKey: 'qVjwB7K3EUJBBg',
 		redirectUri: "http://loki.cpfk.net:31415",
 		scope: [ 'identity', 'vote', 'submit', 'read' ],
-		expires_in: 7200
+		expires_in: 7200,
+		duration: 'permanent'
 	}
 });
 
@@ -43,14 +44,17 @@ $(function() {
 						p.title +
 					'</a>' +
 				'</h3>' +
+				'<audio controls preload autoplay load><source src="' + p.url + '" type="audio/wav"></audio>' +
 				'<div class="footer">' +
-					'<a href="https://www.reddit.com/user/' + p.author + '">' +
-						p.author +
-					'</a>' +
-					' &middot; ' +
-					'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
-						moment(new Date(p.created_utc * 1000)).fromNow() +
-					'</a>' +
+					'<small class="footer">' +
+						'<a href="https://www.reddit.com/user/' + p.author + '">' +
+							p.author +
+						'</a>' +
+						' &middot; ' +
+						'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+							moment(new Date(p.created_utc * 1000)).fromNow() +
+						'</a>' +
+					'</small>' +
 				'</div>' +
 			'</div>';
 		}
@@ -70,11 +74,13 @@ $(document).on('click', '#record:not(.disabled)', function () {
 		$('#record, #download').addClass('disabled');
 		$('#stop').removeClass('disabled');
 
-		var html = 'Recording...<br>';
+		var html = 'Recording...';
 		startRecTime = new Date();
 
 		interval = setInterval(function () {
-			html = new Date() - startRecTime;
+		var html = 'Recording...<br>';
+			html += Math.floor((new Date() - startRecTime) / 1000) + ' seconds';
+			$('#humming-info').html(html);
 		}, 200);
 
 		$('#humming-info').html(html);

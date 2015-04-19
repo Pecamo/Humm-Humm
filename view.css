@@ -124,8 +124,16 @@ button.disabled{
 	font-size: 15px;
 }
 
+#humming-info * {
+	padding: 4px 5px;
+}
+
+#input-title {
+	padding: 5px 7px;
+}
+
 #upload {
-	margin-top: 5px;
+	margin-bottom: 1px;
 }
 
 #upload-info {
@@ -158,4 +166,9 @@ button.disabled{
 
 #post #audio {
 	margin: 10px;
+}
+
+#posts .title {
+	margin-top: 5px;
+	margin-bottom: 10px;
 }
