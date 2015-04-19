@@ -70,11 +70,13 @@ $(document).on('click', '#record:not(.disabled)', function () {
 		$('#record, #download').addClass('disabled');
 		$('#stop').removeClass('disabled');
 
-		var html = 'Recording...<br>';
+		var html = 'Recording...';
 		startRecTime = new Date();
 
 		interval = setInterval(function () {
-			html = new Date() - startRecTime;
+		var html = 'Recording...<br>';
+			html += Math.floor((new Date() - startRecTime) / 1000) + ' seconds';
+			$('#humming-info').html(html);
 		}, 200);
 
 		$('#humming-info').html(html);
