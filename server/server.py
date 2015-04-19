@@ -80,8 +80,6 @@ class MyServer(BaseHTTPRequestHandler):
         data = self.rfile.readline()
         print(data)
         data = self.rfile.readline()
-        print(data)
-        # useless comment
         return data
 
     def send_html(self, path: str):
