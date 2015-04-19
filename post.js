@@ -44,27 +44,37 @@ $(function() {
 			}
 			
 			var decoded = $("<div/>").html(c.body_html).text();
-
+			
+			var scores =
+			'<div class="score">' +
+				'<div class="up"></div>' +
+				  '<p>' + (p.ups - p.downs) + '</p>' +
+				'<div class="down"></div>' +
+			'</div>';
+			
 			html +=
 			'<div class="post">' +
-				'<div class="body">' +
-					decoded +
-				'</div>';
+				scores +
+				'<div id="post-body">' +
+					'<div class="body">' +
+						decoded +
+					'</div>';
 
-				if (typeof youtubeId !== 'undefined') {
-					html += '<iframe width="420" height="345" src="http://www.youtube.com/embed/' + youtubeId + '"></iframe>';
-				}
+					if (typeof youtubeId !== 'undefined') {
+						html += '<iframe width="420" height="345" src="http://www.youtube.com/embed/' + youtubeId + '"></iframe>';
+					}
 
-				html += '<div class="footer">' +
-					'<small>' +
-						'<a href="https://www.reddit.com/user/' + c.author + '">' +
-							c.author +
-						'</a>' +
-						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
-							moment(new Date(c.created_utc * 1000)).fromNow() +
-						'</a>' +
-					'<small/>' +
+					html += '<div class="footer">' +
+						'<small>' +
+							'<a href="https://www.reddit.com/user/' + c.author + '">' +
+								c.author +
+							'</a>' +
+							' &middot; ' +
+							'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
+								moment(new Date(c.created_utc * 1000)).fromNow() +
+							'</a>' +
+						'<small/>' +
+					'</div>' +
 				'</div>' +
 			'</div>';
 		}
