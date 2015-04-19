@@ -43,14 +43,16 @@ $(function() {
 					decoded +
 				'</div>' +
 				'<div class="footer">' +
-					'<a href="https://www.reddit.com/user/' + c.author + '">' +
-						c.author +
-					'</a>' +
-					' &middot; ' +
-					'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
-						moment(new Date(c.created_utc * 1000)).fromNow() +
-					'</a>' +
-				'</div>' +
+					'<small>' +
+						'<a href="https://www.reddit.com/user/' + c.author + '">' +
+							c.author +
+						'</a>' +
+						' &middot; ' +
+						'<a href="https://www.reddit.com/r/' + c.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/' + c.id + '" title="view/post replies">' +
+							moment(new Date(c.created_utc * 1000)).fromNow() +
+						'</a>' +
+					'<small/>' +
+				'<div/>' +
 			'</div>';
 		}
 

@@ -46,13 +46,15 @@ $(function() {
 				'</h3>' +
 				'<audio controls preload autoplay load><source src="' + p.url + '" type="audio/wav"></audio>' +
 				'<div class="footer">' +
-					'<a href="https://www.reddit.com/user/' + p.author + '">' +
-						p.author +
-					'</a>' +
-					' &middot; ' +
-					'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
-						moment(new Date(p.created_utc * 1000)).fromNow() +
-					'</a>' +
+					'<small class="footer">' +
+						'<a href="https://www.reddit.com/user/' + p.author + '">' +
+							p.author +
+						'</a>' +
+						' &middot; ' +
+						'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+							moment(new Date(p.created_utc * 1000)).fromNow() +
+						'</a>' +
+					'</small>' +
 				'</div>' +
 			'</div>';
 		}
