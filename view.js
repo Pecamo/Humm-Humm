@@ -55,7 +55,7 @@ $(function() {
 							moment(new Date(p.created_utc * 1000)).fromNow() +
 						'</a>' +
 						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+						'<a href="/post.html?' + p.id + '">' +
 							p.num_comments + ' commentaire' + (p.num_comments > 1 ? 's' : '') +
 						'</a>' +
 					'</small>' +
