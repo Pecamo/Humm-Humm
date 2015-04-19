@@ -40,6 +40,20 @@ $(document).ready(function() {
 	$(document).on('click', '#download:not(.disabled)', function() {
 		$('<a href="'+blob+'" download="Recording.wav"></a>')[0].click();
 	});
+
+	$(document).on('click', '#login-button:not(.disabled)', function() {
+		login();
+	});
+
+	// Check if we have an access token in the hash, if so
+   // we can authenticate with reddit and make our call!
+   var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
+   var accessToken = match ? match[1] : '';
+
+   if (accessToken) {
+   		alert("I THINK YOU ARE FUCKING LOGGED IN");
+   		$("#login").hide();
+   }
 });
 
 $(document).on('click', '#upload', function () {
