@@ -8,7 +8,8 @@ var reddit = new Snoocore({
 		consumerKey: 'qVjwB7K3EUJBBg',
 		redirectUri: "http://loki.cpfk.net:31415",
 		scope: [ 'identity', 'vote', 'submit', 'read' ],
-		expires_in: 7200
+		expires_in: 7200,
+		duration: 'permanent'
 	}
 });
 
