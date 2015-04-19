@@ -17,6 +17,11 @@ $(function() {
 	$('#captcha').hide();
 	$('#download').addClass('disabled');
 
+	var token = localStorage.getItem('accessToken');
+	if (token != "") {
+		accessToken = token;
+	}
+
 	if (accessToken) {
 		localStorage.setItem('accessToken', accessToken);
 		$("#login").hide();
