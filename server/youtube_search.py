@@ -14,5 +14,9 @@ def search(terms:str) -> str:
 
     youtube_watch = "https://www.youtube.com/watch?v="
 
-    return youtube_watch + [search_result for search_result in search_response.get("items", [])
-                            if search_result["id"]["kind"] == "youtube#video"][0]["id"]["videoId"]
+    video_results = [search_result for search_result in search_response.get("items", [])
+                    if search_result["id"]["kind"] == "youtube#video"]
+    if len(video_results) > 0:
+        return youtube_watch + video_results[0]["id"]["videoId"]
+    else:
+        return None

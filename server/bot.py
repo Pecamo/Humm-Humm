@@ -19,7 +19,6 @@ class MyHTMLParser(HTMLParser):
         print("Encountered some data  :", data)
 
 disclaimer = "\n\nI am a bot."
-tag = "[Answer]"
 yt_search = "https://www.youtube.com/results?search_query="
 
 r = praw.Reddit(user_agent="humm_youtube")
@@ -29,13 +28,12 @@ submissions = subreddit.get_new(limit=100)
 current_time = time.time()
 for submission in submissions:
     sub_age = (current_time - submission.created_utc) / 60 / 60 / 24
-    if sub_age < 1 and submission.comments != [] and collection.find_one({"sub_id": submission.id}) is None:
+    if sub_age < 1 and submission.comments != []:
         for comm in submission.comments:
-            if tag in comm.body and "http" not in comm.body:
-                for line in comm.body.split("\n"):
-                    if tag in line:
-                        line = line.replace(tag, '')
-                        res = search(line)
-                        print(res)
-                        comm.reply("[" + line + "](" + res + ")")
-                        collection.insert_one({"sub_id": submission.id})
+            if "http" not in comm.body and collection.find_one({"comm_id": str(submission.id) + str(comm.id)}) is None:
+                line = comm.body.split("\n")[0]
+                res = search(line)
+                if res is not None:
+                    print(res)
+                    comm.reply("[" + line + "](" + res + ")")
+                    collection.insert_one({"sub_id": str(submission.id) + str(comm.id)})
