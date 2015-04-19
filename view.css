@@ -63,6 +63,8 @@ html, body {
 	margin: auto;
 	
 	padding: 20px 0px;
+	
+	border-radius: 6px;
 
 	position: absolute;
 	background-color: rgba(127, 127, 127, 0.95);
