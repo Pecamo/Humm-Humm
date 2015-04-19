@@ -43,13 +43,22 @@ $(function() {
 
 		// $('#audio').html('<audio controls preload autoplay load><source src="' + post.url + '" type="audio/wav"></audio>')
 
-		var html = ''
+		var html = '';
+		var scores = '';
 
 		for (var i = 0, l = posts.length; i < l; i++) {
 			var p = posts[i].data;
 
+			scores +=
+			'<div class="score">' +
+				'<div class="up"></div>' +
+				  '<p>' + (p.ups - p.downs) + '</p>' +
+				'<div class="down"></div>' +
+			'</div>';
+			
 			html +=
 			'<div class="post">' +
+				scores +
 				'<h3 class="title">' +
 					'<a href="/post.html?' + p.id + '">' +
 						p.title +
