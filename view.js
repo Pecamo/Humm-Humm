@@ -58,26 +58,28 @@ $(function() {
 			html +=
 			'<div class="post">' +
 				scores +
-				'<h3 class="title">' +
-					'<a href="/post.html?' + p.id + '">' +
-						p.title +
-					'</a>' +
-				'</h3>' +
-				'<audio controls preload><source src="' + p.url.replace("player", "sounds") + '" type="audio/wav"></audio>' +
-				'<div class="footer">' +
-					'<small class="footer">' +
-						'<a href="https://www.reddit.com/user/' + p.author + '">' +
-							p.author +
-						'</a>' +
-						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
-							moment(new Date(p.created_utc * 1000)).fromNow() +
-						'</a>' +
-						' &middot; ' +
+				'<div id="post-body">' +
+					'<h3 class="title">' +
 						'<a href="/post.html?' + p.id + '">' +
-							p.num_comments + ' commentaire' + (p.num_comments > 1 ? 's' : '') +
+							p.title +
 						'</a>' +
-					'</small>' +
+					'</h3>' +
+					'<audio controls preload><source src="' + p.url.replace("player", "sounds") + '" type="audio/wav"></audio>' +
+					'<div class="footer">' +
+						'<small class="footer">' +
+							'<a href="https://www.reddit.com/user/' + p.author + '">' +
+								p.author +
+							'</a>' +
+							' &middot; ' +
+							'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+								moment(new Date(p.created_utc * 1000)).fromNow() +
+							'</a>' +
+							' &middot; ' +
+							'<a href="/post.html?' + p.id + '">' +
+								p.num_comments + ' commentaire' + (p.num_comments > 1 ? 's' : '') +
+							'</a>' +
+						'</small>' +
+					'</div>' +
 				'</div>' +
 			'</div>';
 		}
