@@ -6,7 +6,7 @@ var reddit = new Snoocore({
 	oauth: {
 		type: 'implicit',
 		consumerKey: 'qVjwB7K3EUJBBg',
-		redirectUri: "http://localhost:31415",
+		redirectUri: "http://loki.cpfk.net:31415",
 		scope: [ 'identity', 'vote', 'submit', 'read' ],
 		expires_in: 7200
 	}
