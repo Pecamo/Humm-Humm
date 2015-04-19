@@ -18,7 +18,9 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 		params.captcha = captchaCode;
 	}
 	reddit.auth(accessToken).then(function() {
-		console.log("Before POST");
+		console.log("Before POST LINK");
+		console.log("params :");
+		console.log(params);
 		return reddit('/api/submit').post(params);
 	}).then(function(data) {
 		console.log("After POST : ");

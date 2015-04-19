@@ -154,8 +154,8 @@ function showCaptcha(link, titleText, url, iden) {
 
 	$(document).on('click', '#captcha-submit', function () {
 		var captchaCode = $("#captcha-input").val();
+		$("#captcha").hide();
 		postLink(link, titleText, iden, captchaCode);
-		$("#captcha-input").hide();
 	});
 }
 
