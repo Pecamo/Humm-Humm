@@ -3,7 +3,7 @@
 <body>
 
 <audio controls>
-  <source src="down_to_cases.wav" type="audio/wav">
+  <source src="/sounds/$$REPLACE_ME$$" type="audio/wav">
 </audio>
 
 </body>
