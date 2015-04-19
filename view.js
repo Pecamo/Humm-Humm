@@ -61,13 +61,23 @@ $(function() {
 
 var globlob = "";
 var globurl = "";
+var startRecTime;
+var interval;
 
 // Audio capture button actions
 $(document).on('click', '#record:not(.disabled)', function () {
 	$.voice.record(false, function () {
 		$('#record, #download').addClass('disabled');
 		$('#stop').removeClass('disabled');
-		$('#humming-info').html('Recording...');
+
+		var html = 'Recording...<br>';
+		startRecTime = new Date();
+
+		interval = setInterval(function () {
+			html = new Date() - startRecTime;
+		}, 200);
+
+		$('#humming-info').html(html);
 	});
 });
 
@@ -76,6 +86,7 @@ $(document).on('click', '#stop:not(.disabled)', function () {
 		globlob = blob;
 		globurl = URL.createObjectURL(blob)
 		$.voice.stop();
+		clearInterval(interval);
 		
 		$('#audio').attr('src', globurl);
 		$('#download').removeClass('disabled');
