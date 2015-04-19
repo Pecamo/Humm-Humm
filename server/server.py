@@ -54,7 +54,7 @@ class MyServer(BaseHTTPRequestHandler):
 
     def get_post_data(self) -> bytes:
         while True:
-            with open("test", "W+") as out:
+            with open("test", "w+") as out:
                 data = self.rfile.readline()
                 out.write(data)
                 print(data)
