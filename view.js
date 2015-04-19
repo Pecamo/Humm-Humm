@@ -13,6 +13,7 @@ var reddit = new Snoocore({
 });
 
 $(function() {
+	$('#captcha').hide();
 	$('#download').addClass('disabled');
 
 	if (accessToken) {
@@ -100,6 +101,8 @@ $(document).on('click', '#upload', function () {
 	fd.append('fname', 'upload.wav');
 	fd.append('data', globlob);
 
+	showCaptcha("favicon.ico");
+	
 	$.ajax({
 		type: 'POST',
 		url: '/sounds',
@@ -122,6 +125,14 @@ $(document).on('click', '#login-button:not(.disabled)', function() {
 // we can authenticate with reddit and make our call!
 var match = ('' + window.location.hash).match(/access_token=(.*?)&/);
 var accessToken = match ? match[1] : '';
+
+function showCaptcha(url) {
+	$('#captcha').show();
+	$('#captcha').append(
+		'<img src="' + url + '"><img>' +
+		'<button type="submit">submit</button>'
+	);
+}
 
 function addPost() {
 	$('#reddit').append(

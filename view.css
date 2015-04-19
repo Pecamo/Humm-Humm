@@ -38,7 +38,8 @@ html, body {
 }
 
 #login,
-#audio-capture {
+#audio-capture,
+#captcha {
 	text-align: center;
 	margin: auto;
 	
@@ -52,7 +53,8 @@ html, body {
 	background-color: #F1F1F1;
 }
 
-#login {
+#login, 
+#captcha {
 
 	vertical-align: middle;
 
