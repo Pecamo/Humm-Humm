@@ -15,6 +15,4 @@ def search(terms:str) -> str:
     youtube_watch = "https://www.youtube.com/watch?v="
 
     return youtube_watch + [search_result for search_result in search_response.get("items", [])
-            if search_result["id"]["kind"] == "youtube#video"][0]["id"]["videoId"]
-
-print(search("darude sandstorm"))
+                            if search_result["id"]["kind"] == "youtube#video"][0]["id"]["videoId"]
