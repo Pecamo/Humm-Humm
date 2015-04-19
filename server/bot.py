@@ -31,4 +31,6 @@ for submission in submissions:
                 for line in comm.body.split("\n"):
                     if tag in line:
                         line = line.replace(tag, '')
-                        print(search(line))
+                        res = search(line)
+                        print(res)
+                        comm.reply(res)
