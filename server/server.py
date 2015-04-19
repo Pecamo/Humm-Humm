@@ -53,34 +53,12 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_error(400, "Cannot upload here.")
 
     def get_post_data(self) -> bytes:
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        print(data)
-        data = self.rfile.readline()
-        return data
+        while True:
+            with open("test", "wb+") as out:
+                data = self.rfile.readline()
+                out.write(data)
+                print(data)
+        return b"kljh"
 
     def send_html(self, path: str):
         self.send_path(200, [("Content-type", "text/html")], path)
