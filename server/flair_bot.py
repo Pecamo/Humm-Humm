@@ -1,8 +1,4 @@
 import praw
-from pymongo import MongoClient
-
-db = MongoClient().bot
-collection = db.memory
 
 tags = ["{indeed}", "{Indeed}"]
 solved_flair = "[SOLVED]"
