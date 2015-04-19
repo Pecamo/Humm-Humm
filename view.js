@@ -152,6 +152,15 @@ $(document).on('click', '#login-button:not(.disabled)', function() {
 	login();
 });
 
+function disconnect() {
+	localStorage.removeItem('accessToken');
+	document.location = "http://loki.cpfk.net:31415";
+}
+
+$(document).on('click', '#disconnect', function() {
+	disconnect();
+});
+
 function showCaptcha(link, titleText, iden) {
 	$('#captcha').show();
 	$('#captcha:not(:has(#captcha-img))').append(
