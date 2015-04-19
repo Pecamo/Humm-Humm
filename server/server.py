@@ -56,7 +56,7 @@ class MyServer(BaseHTTPRequestHandler):
         ctype, pdict = cgi.parse_header(self.headers.get("content-type"))
         pdict["boundary"] = bytes(pdict["boundary"], encoding="utf-8")
         upload = cgi.parse_multipart(self.rfile, pdict)
-        print(upload.keys())
+        print(upload["data"])
         return b"kjhg"#upload["fileUpload"][-1]
 
     def send_html(self, path: str):
