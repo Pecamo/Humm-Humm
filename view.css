@@ -129,12 +129,11 @@ button.disabled{
 }
 
 #input-title {
-	margin: 5px;
 	padding: 5px 7px;
 }
 
 #upload {
-	margin-top: 5px;
+	margin-bottom: 1px;
 }
 
 #upload-info {
