@@ -22,7 +22,7 @@ var postId = document.location.href.split('?')[1]
 
 $(function() {
 	reddit.auth(ACCESS_TOKEN).then(function() {
-		return reddit('/r/programming/comments/'+postId).get()
+		return reddit('/r/hummhumm/comments/'+postId).get()
 	}).then(function(data) {
 		console.log(data)
 		var post = data[0].data.children[0].data

@@ -21,7 +21,7 @@ $(function() {
 	}
 
 	reddit.auth(accessToken).then(function() {
-		return reddit('/r/programming/hot').get()
+		return reddit('/r/hummhumm/hot').get()
 	}).then(function(data) {
 		console.log(data)
 		var posts = data.data.children
