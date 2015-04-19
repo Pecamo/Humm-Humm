@@ -124,6 +124,15 @@ button.disabled{
 	font-size: 15px;
 }
 
+#humming-info * {
+	padding: 4px 5px;
+}
+
+#input-title {
+	margin: 5px;
+	padding: 5px 7px;
+}
+
 #upload {
 	margin-top: 5px;
 }
