@@ -33,13 +33,17 @@ $(function() {
 
 		for (var i = 0, l = comments.length; i < l; i++) {
 			var c = comments[i].data;
-			var comments2 = c.replies.data.children;
+
 			var youtubeId;
 
-			for (var j = 0, k = comments2.length; j < k; j++) {
-				var cc = comments2[j];
-				if (cc.data.author === "humm_youtube") {
-					youtubeId = cc.data.body.match(/\[(.*)\]\((.*)\)/)[2].match(/watch\?v=(.*)/)[1];
+			if (c.replies !== '') {
+				var comments2 = c.replies.data.children;
+
+				for (var j = 0, k = comments2.length; j < k; j++) {
+					var cc = comments2[j];
+					if (cc.data.author === "humm_youtube") {
+						youtubeId = cc.data.body.match(/\[(.*)\]\((.*)\)/)[2].match(/watch\?v=(.*)/)[1];
+					}
 				}
 			}
 			
