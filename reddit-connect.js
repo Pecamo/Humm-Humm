@@ -12,8 +12,8 @@ function postLink(link, titleText, captchaIdentifier, captchaCode) {
 			then: "comments",
 			url: link
 		};
-	if (typeof captchaIdentifier === 'undefined') {}
-	else { 
+	if (typeof captchaIdentifier !== 'undefined') {
+		console.log("if (typeof captchaIdentifier !== 'undefined') {", captchaIdentifier, captchaCode)
 		params.iden = captchaIdentifier;
 		params.captcha = captchaCode;
 	}

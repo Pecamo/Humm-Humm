@@ -152,12 +152,16 @@ function showCaptcha(link, titleText, url, iden) {
 		'</div>'
 	);
 
+	$(document).off('click', '#captcha-submit');
+
 	$(document).on('click', '#captcha-submit', function () {
 		var captchaCode = $("#captcha-input").val();
 		$("#captcha").hide();
+		console.log('postLink()', link, titleText, iden, captchaCode);
 		postLink(link, titleText, iden, captchaCode);
 	});
 }
+
 
 function addPost() {
 	$('#reddit').append(
