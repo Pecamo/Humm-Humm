@@ -160,11 +160,14 @@ function showCaptcha(link, titleText, iden) {
 			'<button type="submit" id="captcha-submit">Submit</button>' +
 		'</div>'
 	);
+	
+	$('#captcha-submit').removeClass('disabled');
 
 	$(document).off('click', '#captcha-submit');
 
-	$(document).on('click', '#captcha-submit', function () {
-		console.log('---------')
+	$(document).on('click', '#captcha-submit:not(.disabled)', function () {
+		$('#captcha-submit').addClass('disabled');
+		console.log('---------');
 		var captchaCode = $("#captcha-input").val();
 		$("#captcha").hide();
 		console.log('postLink()', link, titleText, iden, captchaCode);
