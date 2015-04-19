@@ -82,6 +82,7 @@ $(document).on('click', '#stop:not(.disabled)', function () {
 		$('#stop').addClass('disabled');
 		$('#humming-info').html(
 			'<p id="upload-info">Clicking the button will create a post on /r/HummHumm with your recorded voice.</p>' +
+			'<input maxlength="300" type="text" id="input-title" name="input-title" placeholder="Add tags like [Metal][Rock]"/>' + 
 			'<button id="upload">Create a post</button>' +
 			'</div>'
 		);
@@ -95,9 +96,16 @@ $(document).on('click', '#download:not(.disabled)', function () {
 $(document).on('click', '#upload', function () {
 	//console.log(blob);
 	var fd = new FormData();
+	var title = $("#input-title").val();
 	fd.append('fname', 'upload.wav');
 	fd.append('data', globlob);
+
+	postLink("http://www.google.ch", title);
 	
+	/*
+	// CODE ABOVE IS ONLY TESTING CODE
+	// FOR PRODUCTION CODE, UNCOMMENT THIS WHOLE BIG COMMENT
+
 	$.ajax({
 		type: 'POST',
 		url: '/sounds',
@@ -106,8 +114,11 @@ $(document).on('click', '#upload', function () {
 		contentType: false
 	}).done(function (data) {
 		console.log(data);
-		postLink(data, "Trop du test");
+		console.log(title);
+		postLink(data, title);
 	});
+	*/
+
 });
 
 $(document).on('click', '#login-button:not(.disabled)', function() {

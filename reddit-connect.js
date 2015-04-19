@@ -31,7 +31,7 @@ function needsCaptcha() {
 		return reddit('/api/needs_captcha').get();
 	}).then(function(data) {
 		console.log("After POST : ");
-		console.log(data);		
+		console.log(data);
 	});
 }
 
