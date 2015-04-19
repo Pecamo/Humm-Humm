@@ -44,12 +44,11 @@ $(function() {
 		// $('#audio').html('<audio controls preload autoplay load><source src="' + post.url + '" type="audio/wav"></audio>')
 
 		var html = '';
-		var scores = '';
 
 		for (var i = 0, l = posts.length; i < l; i++) {
 			var p = posts[i].data;
 
-			scores +=
+			var scores =
 			'<div class="score">' +
 				'<div class="up"></div>' +
 				  '<p>' + (p.ups - p.downs) + '</p>' +
