@@ -206,6 +206,7 @@ a:visited {
 	position: relative;
 }
 
+
 .score .up {
 	width: 0;
 	height: 0;
@@ -232,6 +233,12 @@ a:visited {
 }
 
 .post button:after {
+	content:'';
+	display:block;
+	clear: both;
+}
+
+.score {
 	content:'';
 	display:block;
 	clear: both;
