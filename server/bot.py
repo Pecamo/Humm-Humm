@@ -2,7 +2,7 @@ import praw
 import time
 from html.parser import HTMLParser
 import requests
-
+from youtube_search import search
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -31,11 +31,4 @@ for submission in submissions:
                 for line in comm.body.split("\n"):
                     if tag in line:
                         line = line.replace(tag, '')
-                        query = "+".join(line.split(" "))
-                        if query.startswith("+"):
-                            query = query[1:]
-                        if query.endswith("+"):
-                            query = query[:-1]
-                        final_query = yt_search + query
-                        r = requests.get(final_query)
-                        print(r.text.split("<div id=\"results\">")[1])
+                        print(search(line))
