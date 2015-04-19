@@ -61,6 +61,10 @@ html, body {
 	background-color: #F1F1F1;
 }
 
+#footer {
+	font-size: 60%;
+}
+
 #disconnect {
 	font-size: 40%;
 }
