@@ -43,33 +43,43 @@ $(function() {
 
 		// $('#audio').html('<audio controls preload autoplay load><source src="' + post.url + '" type="audio/wav"></audio>')
 
-		var html = ''
+		var html = '';
 
 		for (var i = 0, l = posts.length; i < l; i++) {
 			var p = posts[i].data;
 
+			var scores =
+			'<div class="score">' +
+				'<div class="up"></div>' +
+				  '<p>' + (p.ups - p.downs) + '</p>' +
+				'<div class="down"></div>' +
+			'</div>';
+			
 			html +=
 			'<div class="post">' +
-				'<h3 class="title">' +
-					'<a href="/post.html?' + p.id + '">' +
-						p.title +
-					'</a>' +
-				'</h3>' +
-				'<audio controls preload><source src="' + p.url.replace("player", "sounds") + '" type="audio/wav"></audio>' +
-				'<div class="footer">' +
-					'<small class="footer">' +
-						'<a href="https://www.reddit.com/user/' + p.author + '">' +
-							p.author +
-						'</a>' +
-						' &middot; ' +
-						'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
-							moment(new Date(p.created_utc * 1000)).fromNow() +
-						'</a>' +
-						' &middot; ' +
+				scores +
+				'<div id="post-body">' +
+					'<h3 class="title">' +
 						'<a href="/post.html?' + p.id + '">' +
-							p.num_comments + ' commentaire' + (p.num_comments > 1 ? 's' : '') +
+							p.title +
 						'</a>' +
-					'</small>' +
+					'</h3>' +
+					'<audio controls preload><source src="' + p.url.replace("player", "sounds") + '" type="audio/wav"></audio>' +
+					'<div class="footer">' +
+						'<small class="footer">' +
+							'<a href="https://www.reddit.com/user/' + p.author + '">' +
+								p.author +
+							'</a>' +
+							' &middot; ' +
+							'<a href="https://www.reddit.com/r/' + p.subreddit + '/comments/' + p.id + '/fuck_your_wrong_console_code/" title="view/post replies">' +
+								moment(new Date(p.created_utc * 1000)).fromNow() +
+							'</a>' +
+							' &middot; ' +
+							'<a href="/post.html?' + p.id + '">' +
+								p.num_comments + ' commentaire' + (p.num_comments > 1 ? 's' : '') +
+							'</a>' +
+						'</small>' +
+					'</div>' +
 				'</div>' +
 			'</div>';
 		}

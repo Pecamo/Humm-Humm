@@ -29,11 +29,19 @@ $(function() {
 
 		var html = '<a href="https://www.reddit.com/r/' + post.subreddit + '/comments/' + postId + '/fuck_your_wrong_console_code/">View Post on /r/HummHumm</a>';
 
-		$('#audio').html('<audio controls autoplay preload loop><source src="' + post.url.replace("player", "sounds") + '" type="audio/wav"></audio>')
+		$('#audio').html('<audio controls autoplay preload><source src="' + post.url.replace("player", "sounds") + '" type="audio/wav"></audio>')
 
 		for (var i = 0, l = comments.length; i < l; i++) {
 			var c = comments[i].data;
-			console.log(c.replies)
+			var comments2 = c.replies.data.children;
+			var youtubeId;
+
+			for (var j = 0, k = comments2.length; j < k; j++) {
+				var cc = comments2[j];
+				if (cc.data.author === "humm_youtube") {
+					youtubeId = cc.data.body.match(/\[(.*)\]\((.*)\)/)[2].match(/watch\?v=(.*)/)[1];
+				}
+			}
 			
 			var decoded = $("<div/>").html(c.body_html).text();
 
@@ -41,8 +49,13 @@ $(function() {
 			'<div class="post">' +
 				'<div class="body">' +
 					decoded +
-				'</div>' +
-				'<div class="footer">' +
+				'</div>';
+
+				if (typeof youtubeId !== 'undefined') {
+					html += '<iframe width="420" height="345" src="http://www.youtube.com/embed/' + youtubeId + '"></iframe>';
+				}
+
+				html += '<div class="footer">' +
 					'<small>' +
 						'<a href="https://www.reddit.com/user/' + c.author + '">' +
 							c.author +

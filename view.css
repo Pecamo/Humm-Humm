@@ -194,6 +194,28 @@ a:visited {
 	color: #7D6194;
 }
 
+.score {
+	float: left;
+	margin-left: 10px;
+	margin-right: 20px;
+	top: 20px;
+	position: relative;
+}
+
+.score .up {
+	width: 0;
+	height: 0;
+	border: transparent 6px solid;
+	border-bottom: gray 10px solid;
+}
+
+.score .down {
+	width: 0;
+	height: 0;
+	border: transparent 6px solid;
+	border-top: gray 10px solid;
+}
+
 .post input[type="text"] {
 	padding: 5px 7px;
 	width: 400px;
