@@ -9,17 +9,6 @@ var reddit = new Snoocore({
 		type: 'implicit',
 		consumerKey: 'wtf',
 		redirectUri: 'wtf',
-		scope: [ 'read' ]
-	}
-});
-
-var reddit2 = new Snoocore({
-	userAgent: '',
-	throttle: 1000,
-	oauth: {
-		type: 'implicit',
-		consumerKey: 'wtf',
-		redirectUri: 'wtf',
 		scope: [ 'read', 'submit' ]
 	}
 });
@@ -90,8 +79,8 @@ $(function() {
 				thing_id: post.link_id
 			}
 
-			reddit2.auth(ACCESS_TOKEN).then(function() {
-				return reddit2('/r/hummhumm/comments/'+postId).post(params)
+			reddit.auth(ACCESS_TOKEN).then(function() {
+				return reddit('/r/hummhumm/comments/'+postId).post(params)
 			}).then(function(data) {
 				console.log(data);
 			});
