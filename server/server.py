@@ -6,7 +6,7 @@ from os import curdir, sep
 from helpers import *
 from pymongo import MongoClient
 import gridfs
-import re
+import cgi, cgitb
 from bson.objectid import ObjectId
 
 CWD = os.path.abspath('.')
@@ -53,12 +53,10 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_error(400, "Cannot upload here.")
 
     def get_post_data(self) -> bytes:
-        while True:
-            with open("test", "wb+") as out:
-                data = self.rfile.readline()
-                out.write(data)
-                print(data)
-        return b"kljh"
+        ctype, pdict = cgi.parse_header(self.headers.get("content-type"))
+        pdict["boundary"] = bytes(pdict["boundary"], encoding="utf-8")
+        upload = cgi.parse_multipart(self.rfile, pdict)
+        return upload["fileUpload"][-1]
 
     def send_html(self, path: str):
         self.send_path(200, [("Content-type", "text/html")], path)
