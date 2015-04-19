@@ -44,7 +44,7 @@ $(function() {
 						p.title +
 					'</a>' +
 				'</h3>' +
-				'<audio controls preload autoplay load><source src="' + p.url + '" type="audio/wav"></audio>' +
+				'<audio controls autoplay><source src="' + p.url + '" type="audio/wav"></audio>' +
 				'<div class="footer">' +
 					'<small class="footer">' +
 						'<a href="https://www.reddit.com/user/' + p.author + '">' +
