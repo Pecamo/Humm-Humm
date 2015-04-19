@@ -23,7 +23,8 @@ $(function() {
 	$('#download').addClass('disabled');
 
 	var token = localStorage.getItem('accessToken');
-	if (typeof token !== 'undefined') {
+	if (token) {
+		console.log("Found token in localStorage : " + token);
 		accessToken = token;
 	}
 
