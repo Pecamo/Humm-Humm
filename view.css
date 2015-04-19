@@ -190,6 +190,20 @@ a:visited {
 	color: #7D6194;
 }
 
+.scores .up {
+	width: 0;
+	height: 0;
+	border: transparent 6px solid;
+	border-bottom: gray 10px solid;
+}
+
+.scores .down {
+	width: 0;
+	height: 0;
+	border: transparent 6px solid;
+	border-top: gray 10px solid;
+}
+
 .post input[type="text"] {
 	padding: 5px 7px;
 	width: 400px;
