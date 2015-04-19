@@ -100,12 +100,6 @@ $(document).on('click', '#upload', function () {
 	fd.append('fname', 'upload.wav');
 	fd.append('data', globlob);
 
-	postLink("http://www.google.ch", title);
-	
-	/*
-	// CODE ABOVE IS ONLY TESTING CODE
-	// FOR PRODUCTION CODE, UNCOMMENT THIS WHOLE BIG COMMENT
-
 	$.ajax({
 		type: 'POST',
 		url: '/sounds',
@@ -117,7 +111,6 @@ $(document).on('click', '#upload', function () {
 		console.log(title);
 		postLink(data, title);
 	});
-	*/
 
 });
 
