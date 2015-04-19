@@ -144,7 +144,6 @@ $(document).on('click', '#upload:not(.disabled)', function () {
 		console.log(data);
 		console.log(title);
 		postLink("http://loki.cpfk.net:31415"+data, title);
-		location.reload();
 	});
 
 });

@@ -25,6 +25,7 @@ function postLink(link, titleText, iden, captchaCode) {
 	}).then(function(data) {
 		console.log("After POST : ");
 		console.log(data);
+		location.reload();
 	}).catch(function(data) {
 		var body = data.body;
 		var object = jQuery.parseJSON(body);
