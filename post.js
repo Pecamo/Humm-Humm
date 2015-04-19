@@ -76,7 +76,7 @@ $(function() {
 			var params = {
 				api_type: "json",
 				text: artist + ' - ' + title,
-				thing_id: post.link_id
+				thing_id: post.name
 			}
 
 			reddit.auth(ACCESS_TOKEN).then(function() {
